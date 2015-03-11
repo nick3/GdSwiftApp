@@ -14,6 +14,11 @@
 		0141F8201AB0312100B66BF3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0141F81F1AB0312100B66BF3 /* Images.xcassets */; };
 		0141F8231AB0312100B66BF3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0141F8211AB0312100B66BF3 /* LaunchScreen.xib */; };
 		0141F82F1AB0312200B66BF3 /* guangdiuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141F82E1AB0312200B66BF3 /* guangdiuTests.swift */; };
+		0141F83C1AB03C7900B66BF3 /* HTMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141F8391AB03C7900B66BF3 /* HTMLNode.swift */; };
+		0141F83D1AB03C7900B66BF3 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141F83A1AB03C7900B66BF3 /* HTMLParser.swift */; };
+		0141F8401AB03D2200B66BF3 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0141F83E1AB03D0200B66BF3 /* libxml2.dylib */; };
+		0141F8421AB03DB400B66BF3 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141F8411AB03DB400B66BF3 /* UIViewExt.swift */; };
+		0141F8441AB03DC900B66BF3 /* GuangDiuAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141F8431AB03DC900B66BF3 /* GuangDiuAPI.swift */; };
 		5880F85680D21B9C78CBDA5E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE548E6822823E23F6E027D3 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -39,6 +44,12 @@
 		0141F8281AB0312200B66BF3 /* guangdiuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = guangdiuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0141F82D1AB0312200B66BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0141F82E1AB0312200B66BF3 /* guangdiuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = guangdiuTests.swift; sourceTree = "<group>"; };
+		0141F8391AB03C7900B66BF3 /* HTMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLNode.swift; sourceTree = "<group>"; };
+		0141F83A1AB03C7900B66BF3 /* HTMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
+		0141F83B1AB03C7900B66BF3 /* Swift-HTML-Parser-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swift-HTML-Parser-Bridging-Header.h"; sourceTree = "<group>"; };
+		0141F83E1AB03D0200B66BF3 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		0141F8411AB03DB400B66BF3 /* UIViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		0141F8431AB03DC900B66BF3 /* GuangDiuAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuangDiuAPI.swift; sourceTree = "<group>"; };
 		6DA382A94AFF6B140858CF4E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AE548E6822823E23F6E027D3 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F793E8B4186F4F0BAEADCE24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -49,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0141F8401AB03D2200B66BF3 /* libxml2.dylib in Frameworks */,
 				5880F85680D21B9C78CBDA5E /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +98,9 @@
 		0141F8131AB0312100B66BF3 /* guangdiu */ = {
 			isa = PBXGroup;
 			children = (
+				0141F8381AB03C7900B66BF3 /* Swift-HTML-Parser */,
+				0141F8411AB03DB400B66BF3 /* UIViewExt.swift */,
+				0141F8431AB03DC900B66BF3 /* GuangDiuAPI.swift */,
 				0141F8161AB0312100B66BF3 /* AppDelegate.swift */,
 				0141F8181AB0312100B66BF3 /* FirstViewController.swift */,
 				0141F81A1AB0312100B66BF3 /* SecondViewController.swift */,
@@ -122,9 +137,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0141F8381AB03C7900B66BF3 /* Swift-HTML-Parser */ = {
+			isa = PBXGroup;
+			children = (
+				0141F8391AB03C7900B66BF3 /* HTMLNode.swift */,
+				0141F83A1AB03C7900B66BF3 /* HTMLParser.swift */,
+				0141F83B1AB03C7900B66BF3 /* Swift-HTML-Parser-Bridging-Header.h */,
+			);
+			path = "Swift-HTML-Parser";
+			sourceTree = "<group>";
+		};
 		3BC99D254014D9AA0A26D57B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0141F83E1AB03D0200B66BF3 /* libxml2.dylib */,
 				AE548E6822823E23F6E027D3 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -290,9 +316,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0141F8421AB03DB400B66BF3 /* UIViewExt.swift in Sources */,
+				0141F83C1AB03C7900B66BF3 /* HTMLNode.swift in Sources */,
+				0141F8441AB03DC900B66BF3 /* GuangDiuAPI.swift in Sources */,
 				0141F81B1AB0312100B66BF3 /* SecondViewController.swift in Sources */,
 				0141F8171AB0312100B66BF3 /* AppDelegate.swift in Sources */,
 				0141F8191AB0312100B66BF3 /* FirstViewController.swift in Sources */,
+				0141F83D1AB03C7900B66BF3 /* HTMLParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,9 +446,15 @@
 			baseConfigurationReference = F793E8B4186F4F0BAEADCE24 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = guangdiu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "逛丢";
+				SWIFT_OBJC_BRIDGING_HEADER = "guangdiu/Swift-HTML-Parser/Swift-HTML-Parser-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -427,9 +463,15 @@
 			baseConfigurationReference = 6DA382A94AFF6B140858CF4E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = guangdiu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "逛丢";
+				SWIFT_OBJC_BRIDGING_HEADER = "guangdiu/Swift-HTML-Parser/Swift-HTML-Parser-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -445,9 +487,14 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = guangdiuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/逛丢.app/逛丢";
 			};
 			name = Debug;
@@ -460,9 +507,14 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = guangdiuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/逛丢.app/逛丢";
 			};
 			name = Release;

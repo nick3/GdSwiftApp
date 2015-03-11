@@ -7,6 +7,7 @@ pod 'SDWebImage', '~> 3.7.1'
 pod 'SwiftTask', '~> 2.6.0'
 pod 'NJKScrollFullScreen', '~> 0.2.5'
 pod 'Dollar', '~> 2.1.0'
+pod 'Cent', '~> 2.1.0'
 
 target 'guangdiu' do
 
