@@ -24,37 +24,68 @@ struct Item {
 }
 
 class GuangDiuAPI {
-  let baseURI = "http://guangdiu.com/m"
-  let loadDataPath = "/loaddata.php"
-  let loadRankPath = "/loadrank.php"
-  let loadCheapPath = "/loadcheap.php"
-  let paramV = "1425537325223"
-  
-  func getLoadDataURL(let pageNo: Int) -> String {
-      return "\(baseURI)\(loadDataPath)?v=\(paramV)&p=\(pageNo)"
-  }
-  func getLoadRankURL(let pageNo: Int) -> String {
-      return "\(baseURI)\(loadRankPath)?v=\(paramV)&type=hot&p=\(pageNo)"
-  }
-  func getLoadCheapURL(let pageNo: Int) -> String {
-      return "\(baseURI)\(loadCheapPath)?v=\(paramV)&p=\(pageNo)"
+  struct BasePath {
+    static let baseURI = "http://guangdiu.com/m"
+    static let loadDataPath = "/loaddata.php"
+    static let loadRankPath = "/loadrank.php"
+    static let loadCheapPath = "/loadcheap.php"
   }
   
-  func getShiShiZheKou(let pageNo: Int, let callback: (items: [Item], pageNo: Int) -> Void) {
-    let url = NSURL(string: getLoadDataURL(pageNo))
-    let request = NSURLRequest(URL: url!)
-    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, err) in
-        if data != nil {
-            if let html = NSString(data: data, encoding: NSUTF8StringEncoding) {
-              let items = self.parseDataHTML(html)
-              callback(items: items, pageNo: pageNo)
+//  func getLoadDataURL(pageNo: Int) -> String {
+//      return "\(baseURI)\(loadDataPath)?v=\(paramV)&p=\(pageNo)"
+//  }
+//  func getLoadRankURL(pageNo: Int) -> String {
+//      return "\(baseURI)\(loadRankPath)?v=\(paramV)&type=hot&p=\(pageNo)"
+//  }
+//  func getLoadCheapURL(pageNo: Int) -> String {
+//      return "\(baseURI)\(loadCheapPath)?v=\(paramV)&p=\(pageNo)"
+//  }
+  
+  class var dataURL: String {
+    return "\(BasePath.baseURI)\(BasePath.loadDataPath)"
+  }
+  class var rankURL: String {
+    return "\(BasePath.baseURI)\(BasePath.loadRankPath)"
+  }
+  class var cheapURL: String {
+    return "\(BasePath.baseURI)\(BasePath.loadCheapPath)"
+  }
+  class var paramV: String {
+    let paramV = "1425537325223"
+    return paramV
+  }
+  
+  func requestData(pageNo: Int) -> AlamoFireTask {
+    return AlamoFireTask { progress, resolve, reject, config in
+      let url = GuangDiuAPI.dataURL
+      let params = ["v": GuangDiuAPI.paramV, "p": "\(pageNo)"]
+      Alamofire.request(.GET, url, parameters: params)
+        .responseString({ (_, _, res, err) -> Void in
+          if err != nil {
+            reject(err!)
           }
-        }
-        else {
-          callback(items: [Item](), pageNo: pageNo)
-        }
-        
+          else {
+            resolve(res!)
+          }
+        })
     }
+  }
+  
+  func getShiShiZheKou(pageNo: Int) {
+//    let url = NSURL(string: getLoadDataURL(pageNo))
+//    let request = NSURLRequest(URL: url!)
+//    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, err) in
+//        if data != nil {
+//            if let html = NSString(data: data, encoding: NSUTF8StringEncoding) {
+//              let items = self.parseDataHTML(html)
+//              callback(items: items, pageNo: pageNo)
+//          }
+//        }
+//        else {
+//          callback(items: [Item](), pageNo: pageNo)
+//        }
+//        
+//    }
   }
   
   func getFengYunBang(let pageNo: Int, let callback: (items: [Item], pageNo: Int) -> Void) {
