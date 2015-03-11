@@ -13,6 +13,7 @@ import SwiftTask
 
 typealias Progress = (bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
 typealias AlamoFireTask = Task<Progress, String, NSError>
+typealias DataTask = Task<Progress, [Item], NSError>
 
 struct Item {
     var title: String
@@ -24,7 +25,7 @@ struct Item {
 }
 
 class GuangDiuAPI {
-  struct BasePath {
+  private struct BasePath {
     static let baseURI = "http://guangdiu.com/m"
     static let loadDataPath = "/loaddata.php"
     static let loadRankPath = "/loadrank.php"
@@ -41,21 +42,21 @@ class GuangDiuAPI {
 //      return "\(baseURI)\(loadCheapPath)?v=\(paramV)&p=\(pageNo)"
 //  }
   
-  class var dataURL: String {
+  private class var dataURL: String {
     return "\(BasePath.baseURI)\(BasePath.loadDataPath)"
   }
-  class var rankURL: String {
+  private class var rankURL: String {
     return "\(BasePath.baseURI)\(BasePath.loadRankPath)"
   }
-  class var cheapURL: String {
+  private class var cheapURL: String {
     return "\(BasePath.baseURI)\(BasePath.loadCheapPath)"
   }
-  class var paramV: String {
+  private class var paramV: String {
     let paramV = "1425537325223"
     return paramV
   }
   
-  func requestData(pageNo: Int) -> AlamoFireTask {
+  private func requestData(pageNo: Int) -> AlamoFireTask {
     return AlamoFireTask { progress, resolve, reject, config in
       let url = GuangDiuAPI.dataURL
       let params = ["v": GuangDiuAPI.paramV, "p": "\(pageNo)"]
@@ -71,62 +72,57 @@ class GuangDiuAPI {
     }
   }
   
-  func getShiShiZheKou(pageNo: Int) {
-//    let url = NSURL(string: getLoadDataURL(pageNo))
+  func getShiShiZheKou(pageNo: Int) -> DataTask {
+    return DataTask { progress, resolve, reject, config in
+      (self.requestData(pageNo) ~ 3).success { (value: String) -> Void in
+        let items = self.parseDataHTML(value)
+        resolve(items)
+      }.failure { (error: NSError?, isCancelled: Bool) -> Void in
+        reject(error!)
+      }
+      return
+    }
+  }
+  
+//  func getFengYunBang(let pageNo: Int, let callback: (items: [Item], pageNo: Int) -> Void) {
+//    let url = NSURL(string: getLoadRankURL(pageNo))
 //    let request = NSURLRequest(URL: url!)
 //    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, err) in
-//        if data != nil {
-//            if let html = NSString(data: data, encoding: NSUTF8StringEncoding) {
-//              let items = self.parseDataHTML(html)
-//              callback(items: items, pageNo: pageNo)
-//          }
+//      if data != nil {
+//        if let html = NSString(data: data, encoding: NSUTF8StringEncoding) {
+//          let items = self.parseRankHTML(html)
+//          callback(items: items, pageNo: pageNo)
 //        }
-//        else {
-//          callback(items: [Item](), pageNo: pageNo)
-//        }
-//        
+//      }
+//      else {
+//        callback(items: [Item](), pageNo: pageNo)
+//      }
+//      
 //    }
-  }
+//  }
+//  
+//  func getJiuKuaiJiu(let pageNo: Int, let callback: (items: [Item], pageNo: Int) -> Void) {
+//    let url = NSURL(string: getLoadCheapURL(pageNo))
+//    let request = NSURLRequest(URL: url!)
+//    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, err) in
+//      if data != nil {
+//        if let html = NSString(data: data, encoding: NSUTF8StringEncoding) {
+//          let items = self.parseCheapHTML(html)
+//          callback(items: items, pageNo: pageNo)
+//        }
+//      }
+//      else {
+//        callback(items: [Item](), pageNo: pageNo)
+//      }
+//      
+//    }
+//  }
   
-  func getFengYunBang(let pageNo: Int, let callback: (items: [Item], pageNo: Int) -> Void) {
-    let url = NSURL(string: getLoadRankURL(pageNo))
-    let request = NSURLRequest(URL: url!)
-    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, err) in
-      if data != nil {
-        if let html = NSString(data: data, encoding: NSUTF8StringEncoding) {
-          let items = self.parseRankHTML(html)
-          callback(items: items, pageNo: pageNo)
-        }
-      }
-      else {
-        callback(items: [Item](), pageNo: pageNo)
-      }
-      
-    }
-  }
-  
-  func getJiuKuaiJiu(let pageNo: Int, let callback: (items: [Item], pageNo: Int) -> Void) {
-    let url = NSURL(string: getLoadCheapURL(pageNo))
-    let request = NSURLRequest(URL: url!)
-    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, err) in
-      if data != nil {
-        if let html = NSString(data: data, encoding: NSUTF8StringEncoding) {
-          let items = self.parseCheapHTML(html)
-          callback(items: items, pageNo: pageNo)
-        }
-      }
-      else {
-        callback(items: [Item](), pageNo: pageNo)
-      }
-      
-    }
-  }
-  
-  func parseDataHTML(let html: String) -> [Item] {
+  private func parseDataHTML(let html: String) -> [Item] {
       var err: NSError?
       var parser = HTMLParser(html: html, error: &err)
       if err != nil {
-          println(err)
+//          println(err)
           exit(1)
       }
       var bodyNode = parser.body
@@ -142,10 +138,10 @@ class GuangDiuAPI {
               var thumbnail = thumbnailNode?.findChildTag("img")?.getAttributeNamed("src") ?? ""
               
               if !Regex("^http://").test(mallPageURL) {
-                  mallPageURL = baseURI + "/" + mallPageURL
+                  mallPageURL = GuangDiuAPI.BasePath.baseURI + "/" + mallPageURL
               }
               if !Regex("^http://").test(thumbnail) {
-                  thumbnail = baseURI + "/" + thumbnail
+                  thumbnail = GuangDiuAPI.BasePath.baseURI + "/" + thumbnail
               }
               
               let item = Item(title: title, source: source, time: time, detail: detail, thumbnail: thumbnail, mallPageURL: mallPageURL)
@@ -155,71 +151,71 @@ class GuangDiuAPI {
       return items
   }
   
-  func parseRankHTML(let html: String) -> [Item] {
-    var err: NSError?
-    var parser = HTMLParser(html: html, error: &err)
-    if err != nil {
-      println(err)
-      exit(1)
-    }
-    var bodyNode = parser.body
-    var items = [Item]()
-    if let divNodes = bodyNode?.findChildTagsAttr("div", attrName: "class", attrValue: "rankitem") {
-      for node in divNodes {
-        let title = node.findChildTagAttr("a", attrName: "class", attrValue: "ranktitle")?.contents ?? ""
-        let source = node.findChildTagAttr("div", attrName: "class", attrValue: "mallname")?.contents ?? ""
-        let time = node.findChildTagAttr("span", attrName: "class", attrValue: "latesttime")?.contents ?? ""
-        let detail = node.findChildTagAttr("div", attrName: "class", attrValue: "abstract")?.contents ?? ""
-        let thumbnailNode = node.findChildTagAttr("a", attrName: "class", attrValue: "rankthumbnail")
-        var mallPageURL = thumbnailNode?.getAttributeNamed("href") ?? ""
-        var thumbnail = thumbnailNode?.findChildTag("img")?.getAttributeNamed("src") ?? ""
-        
-        if !Regex("^http://").test(mallPageURL) {
-          mallPageURL = baseURI + "/" + mallPageURL
-        }
-        if !Regex("^http://").test(thumbnail) {
-          thumbnail = baseURI + "/" + thumbnail
-        }
-        
-        let item = Item(title: title, source: source, time: time, detail: detail, thumbnail: thumbnail, mallPageURL: mallPageURL)
-        items.append(item)
-      }
-    }
-    return items
-  }
-  
-  func parseCheapHTML(let html: String) -> [Item] {
-    var err: NSError?
-    var parser = HTMLParser(html: html, error: &err)
-    if err != nil {
-      println(err)
-      exit(1)
-    }
-    var bodyNode = parser.body
-    var items = [Item]()
-    if let divNodes = bodyNode?.findChildTagsAttr("div", attrName: "class", attrValue: "cheapitem") {
-      for node in divNodes {
-        let title = node.findChildTagAttr("a", attrName: "class", attrValue: "cheaptitle")?.contents ?? ""
-        let source = node.findChildTagAttr("div", attrName: "class", attrValue: "mallname")?.contents ?? ""
-        let time = node.findChildTagAttr("span", attrName: "class", attrValue: "latesttime")?.contents ?? ""
-        let detail = node.findChildTagAttr("div", attrName: "class", attrValue: "abstract")?.contents ?? ""
-        let thumbnailNode = node.findChildTagAttr("a", attrName: "class", attrValue: "cheapthumbnail")
-        var mallPageURL = thumbnailNode?.getAttributeNamed("href") ?? ""
-        var thumbnail = thumbnailNode?.findChildTag("img")?.getAttributeNamed("src") ?? ""
-        
-        if !Regex("^http://").test(mallPageURL) {
-          mallPageURL = baseURI + "/" + mallPageURL
-        }
-        if !Regex("^http://").test(thumbnail) {
-          thumbnail = baseURI + "/" + thumbnail
-        }
-        
-        let item = Item(title: title, source: source, time: time, detail: detail, thumbnail: thumbnail, mallPageURL: mallPageURL)
-        items.append(item)
-      }
-    }
-    return items
-  }
+//  func parseRankHTML(let html: String) -> [Item] {
+//    var err: NSError?
+//    var parser = HTMLParser(html: html, error: &err)
+//    if err != nil {
+//      println(err)
+//      exit(1)
+//    }
+//    var bodyNode = parser.body
+//    var items = [Item]()
+//    if let divNodes = bodyNode?.findChildTagsAttr("div", attrName: "class", attrValue: "rankitem") {
+//      for node in divNodes {
+//        let title = node.findChildTagAttr("a", attrName: "class", attrValue: "ranktitle")?.contents ?? ""
+//        let source = node.findChildTagAttr("div", attrName: "class", attrValue: "mallname")?.contents ?? ""
+//        let time = node.findChildTagAttr("span", attrName: "class", attrValue: "latesttime")?.contents ?? ""
+//        let detail = node.findChildTagAttr("div", attrName: "class", attrValue: "abstract")?.contents ?? ""
+//        let thumbnailNode = node.findChildTagAttr("a", attrName: "class", attrValue: "rankthumbnail")
+//        var mallPageURL = thumbnailNode?.getAttributeNamed("href") ?? ""
+//        var thumbnail = thumbnailNode?.findChildTag("img")?.getAttributeNamed("src") ?? ""
+//        
+//        if !Regex("^http://").test(mallPageURL) {
+//          mallPageURL = BasePath.baseURI + "/" + mallPageURL
+//        }
+//        if !Regex("^http://").test(thumbnail) {
+//          thumbnail = BasePath.baseURI + "/" + thumbnail
+//        }
+//        
+//        let item = Item(title: title, source: source, time: time, detail: detail, thumbnail: thumbnail, mallPageURL: mallPageURL)
+//        items.append(item)
+//      }
+//    }
+//    return items
+//  }
+//  
+//  func parseCheapHTML(let html: String) -> [Item] {
+//    var err: NSError?
+//    var parser = HTMLParser(html: html, error: &err)
+//    if err != nil {
+//      println(err)
+//      exit(1)
+//    }
+//    var bodyNode = parser.body
+//    var items = [Item]()
+//    if let divNodes = bodyNode?.findChildTagsAttr("div", attrName: "class", attrValue: "cheapitem") {
+//      for node in divNodes {
+//        let title = node.findChildTagAttr("a", attrName: "class", attrValue: "cheaptitle")?.contents ?? ""
+//        let source = node.findChildTagAttr("div", attrName: "class", attrValue: "mallname")?.contents ?? ""
+//        let time = node.findChildTagAttr("span", attrName: "class", attrValue: "latesttime")?.contents ?? ""
+//        let detail = node.findChildTagAttr("div", attrName: "class", attrValue: "abstract")?.contents ?? ""
+//        let thumbnailNode = node.findChildTagAttr("a", attrName: "class", attrValue: "cheapthumbnail")
+//        var mallPageURL = thumbnailNode?.getAttributeNamed("href") ?? ""
+//        var thumbnail = thumbnailNode?.findChildTag("img")?.getAttributeNamed("src") ?? ""
+//        
+//        if !Regex("^http://").test(mallPageURL) {
+//          mallPageURL = BasePath.baseURI + "/" + mallPageURL
+//        }
+//        if !Regex("^http://").test(thumbnail) {
+//          thumbnail = BasePath.baseURI + "/" + thumbnail
+//        }
+//        
+//        let item = Item(title: title, source: source, time: time, detail: detail, thumbnail: thumbnail, mallPageURL: mallPageURL)
+//        items.append(item)
+//      }
+//    }
+//    return items
+//  }
 }
 
 class Regex {

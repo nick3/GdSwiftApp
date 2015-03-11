@@ -14,23 +14,97 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DataCell" id="x2P-g0-kEG">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="DataCell" rowHeight="175" id="x2P-g0-kEG" customClass="ZheKouViewCell" customModule="逛丢" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x2P-g0-kEG" id="GZc-yi-qrV">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6js-hQ-ZLG">
+                                            <rect key="frame" x="16" y="11" width="568" height="28"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" red="0.1764705926" green="0.20000001789999999" blue="0.231372565" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GTO-ry-E4P">
+                                            <rect key="frame" x="16" y="47" width="90" height="90"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="4df-gt-bCE"/>
+                                                <constraint firstAttribute="height" constant="90" id="eKR-hB-ES0"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Desc" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ana-NV-EoV">
+                                            <rect key="frame" x="123" y="48" width="461" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMA-OS-Ti6">
+                                            <rect key="frame" x="538" y="141" width="30" height="30"/>
+                                            <state key="normal" title="收藏">
+                                                <color key="titleColor" red="0.95294117647058818" green="0.63137254901960782" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8kt-xQ-Ic3">
+                                            <rect key="frame" x="16" y="146" width="90" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ana-NV-EoV" secondAttribute="trailing" constant="8" id="A22-j0-W0s"/>
+                                        <constraint firstItem="ana-NV-EoV" firstAttribute="top" secondItem="6js-hQ-ZLG" secondAttribute="bottom" constant="9" id="GYp-Ae-eqO"/>
+                                        <constraint firstItem="ana-NV-EoV" firstAttribute="leading" secondItem="GTO-ry-E4P" secondAttribute="trailing" constant="17" id="IaO-rK-SlT"/>
+                                        <constraint firstItem="GTO-ry-E4P" firstAttribute="top" secondItem="6js-hQ-ZLG" secondAttribute="bottom" constant="8" id="Npq-Of-h5b"/>
+                                        <constraint firstItem="SMA-OS-Ti6" firstAttribute="top" secondItem="ana-NV-EoV" secondAttribute="bottom" priority="100" constant="72" id="Oju-2w-anz"/>
+                                        <constraint firstItem="8kt-xQ-Ic3" firstAttribute="top" secondItem="GTO-ry-E4P" secondAttribute="bottom" constant="9" id="QS2-t3-bce"/>
+                                        <constraint firstItem="8kt-xQ-Ic3" firstAttribute="width" secondItem="GTO-ry-E4P" secondAttribute="width" id="cDk-FL-Mte"/>
+                                        <constraint firstItem="6js-hQ-ZLG" firstAttribute="top" secondItem="GZc-yi-qrV" secondAttribute="topMargin" constant="3" id="ctb-l4-Ude"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="SMA-OS-Ti6" secondAttribute="trailing" constant="24" id="fp8-Jq-Hwr"/>
+                                        <constraint firstItem="6js-hQ-ZLG" firstAttribute="leading" secondItem="GZc-yi-qrV" secondAttribute="leadingMargin" constant="8" id="jqC-Xr-OFQ"/>
+                                        <constraint firstItem="GTO-ry-E4P" firstAttribute="leading" secondItem="GZc-yi-qrV" secondAttribute="leadingMargin" constant="8" id="kGe-Yo-0XS"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="SMA-OS-Ti6" secondAttribute="bottom" constant="-4" id="seZ-nM-Y3J"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="6js-hQ-ZLG" secondAttribute="trailing" constant="8" id="zyR-UU-4Gn"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descLabel" destination="ana-NV-EoV" id="3v3-Qb-YlC"/>
+                                    <outlet property="favBtn" destination="SMA-OS-Ti6" id="qe1-as-q2F"/>
+                                    <outlet property="imgView" destination="GTO-ry-E4P" id="gcx-tK-LJu"/>
+                                    <outlet property="mallLabel" destination="8kt-xQ-Ic3" id="5VO-3S-U3P"/>
+                                    <outlet property="titleLabel" destination="6js-hQ-ZLG" id="rih-dx-gRa"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="z8K-8v-vBu" id="1Ph-Pe-aW0"/>
-                            <outlet property="delegate" destination="z8K-8v-vBu" id="V5c-vf-dtv"/>
+                            <outlet property="dataSource" destination="z8K-8v-vBu" id="LAy-Ck-Piz"/>
+                            <outlet property="delegate" destination="z8K-8v-vBu" id="SyA-Xv-OiX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="yar-Yr-Sm0"/>
+                    <navigationItem key="navigationItem" id="yar-Yr-Sm0">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="0Ol-aB-GaI">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="实时折扣"/>
+                                <segment title="风云榜"/>
+                                <segment title="九块九"/>
+                            </segments>
+                            <color key="tintColor" red="0.28627450980392155" green="0.59999999999999998" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="segmentChanged:" destination="z8K-8v-vBu" eventType="valueChanged" id="Y2J-bH-Bol"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentCtrl" destination="0Ol-aB-GaI" id="TRa-x9-sec"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbZ-5Z-aMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1715" y="-284"/>
+            <point key="canvasLocation" x="1715" y="-289"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="elI-UX-2o3">

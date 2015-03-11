@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import SwiftTask
 
 class ZheKouViewController: UITableViewController {
-  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var segmentCtrl: UISegmentedControl!
-
+  
+  let api = GuangDiuAPI()
   var tableData = [Item]()
 
   var pageNo = 1
@@ -31,31 +32,18 @@ class ZheKouViewController: UITableViewController {
   }
   
   func getData(segement type: Int) {
-//    activityIndicator.startAnimating()
-//    isLoading = true
-//    var api = GuangDiuAPI()
-//    var get: (Int, callback: (items: [Item], pageNo: Int) -> Void) -> ()
-//    switch type {
-//    case 0:
-//      get = api.getShiShiZheKou
-//    case 1:
-//      get = api.getFengYunBang
-//    case 2:
-//      get = api.getJiuKuaiJiu
-//    default:
-//      return
-//    }
-//    get(pageNo) { (let items: [Item], let pageNo: Int) in
-//      if items.count > 0 {
-//        self.tableData += items
-//        self.tableView.reloadData()
-//      }
-//      else {
-//        self.noData = true
-//      }
-//      self.activityIndicator.stopAnimating()
-//      self.isLoading = false
-//    }
+    isLoading = true
+    api.getShiShiZheKou(pageNo).success { (items) -> [Item] in
+      if items.count > 0 {
+        self.tableData += items
+        self.tableView.reloadData()
+      }
+      else {
+        self.noData = true
+      }
+      self.isLoading = false
+      return items
+    }
   }
   
   @IBAction func segmentChanged(sender: UISegmentedControl) {
@@ -64,6 +52,12 @@ class ZheKouViewController: UITableViewController {
     tableData = [Item]()
     getData(segement: sender.selectedSegmentIndex)
   }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+
   
   override func scrollViewDidScroll(scrollView: UIScrollView) {
     let offset = scrollView.contentOffset
@@ -80,52 +74,49 @@ class ZheKouViewController: UITableViewController {
       }
     }
   }
-
-  override func didReceiveMemoryWarning() {
-      super.didReceiveMemoryWarning()
-      // Dispose of any resources that can be recreated.
-  }
-
   // MARK: - Table view data source
+  
+  
 
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
       // #warning Potentially incomplete method implementation.
       // Return the number of sections.
-      return 0
+      return 1
   }
 
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      // #warning Incomplete method implementation.
-      // Return the number of rows in the section.
-      return tableData.count
+    return tableData.count
   }
   
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    var cell: UITableViewCell?
-    cell = tableView.dequeueReusableCellWithIdentifier("DataCell") as? UITableViewCell
-    if cell == nil {
-      cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
-    }
+  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> ZheKouViewCell {
+    var cell: ZheKouViewCell?
+    cell = tableView.dequeueReusableCellWithIdentifier("DataCell") as? ZheKouViewCell
     
     if tableData.count > indexPath.row {
       let item = tableData[indexPath.row]
       let title = item.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
       let detail = item.detail.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
       let imgURL = NSURL(string: item.thumbnail)
-      cell!.imageView?.sd_setImageWithURL(imgURL, placeholderImage: UIImage(named: "DefaultIcon"))
-      cell!.textLabel?.text = title
-      cell!.detailTextLabel?.lineBreakMode = .ByWordWrapping
-      cell!.detailTextLabel?.numberOfLines = 6
-      let content = detail
-      let padding: CGFloat = 20
-      let width = tableView.frame.size.width - padding * 2
-      let size = CGSizeMake(width, CGFloat.max)
-      let attrs = [NSFontAttributeName: UIFont(name: "Helvetica", size: 14)!]
-      let frame = content.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attrs, context: nil)
-      cell!.detailTextLabel?.setHeight(frame.height + 1)
-      cell!.detailTextLabel?.text = detail
+//      cell!.imageView.setHeight(90.0)
+//      cell!.imageView.setWidth(90.0)
+      cell!.imgView.sd_setImageWithURL(imgURL, placeholderImage: UIImage(named: "DefaultIcon"))
+      cell!.titleLabel.text = title
+      cell!.descLabel.text = detail
+      cell!.mallLabel.layer.cornerRadius = 5
+      cell!.mallLabel.layer.backgroundColor = UIColor(red: 200.0/255, green: 200.0/255, blue: 200.0/255, alpha: 1.0).CGColor
+      cell!.mallLabel.text = item.source
     }
     return cell!
+  }
+  
+  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//      let content = tableData[indexPath.row].title
+//      let padding: CGFloat = 20
+//      let width = tableView.frame.size.width - padding * 2
+//      let size = CGSizeMake(width, CGFloat.max)
+//      let attrs = [NSFontAttributeName: UIFont(name: "Helvetica", size: 14)!]
+//      let frame = content.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attrs, context: nil)
+    return 220 //frame.size.height + 1
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
