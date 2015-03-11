@@ -14,6 +14,7 @@
 		0141F8201AB0312100B66BF3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0141F81F1AB0312100B66BF3 /* Images.xcassets */; };
 		0141F8231AB0312100B66BF3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0141F8211AB0312100B66BF3 /* LaunchScreen.xib */; };
 		0141F82F1AB0312200B66BF3 /* guangdiuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141F82E1AB0312200B66BF3 /* guangdiuTests.swift */; };
+		5880F85680D21B9C78CBDA5E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE548E6822823E23F6E027D3 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0141F8111AB0312100B66BF3 /* guangdiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = guangdiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0141F8111AB0312100B66BF3 /* 逛丢.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "逛丢.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0141F8151AB0312100B66BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0141F8161AB0312100B66BF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0141F8181AB0312100B66BF3 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +39,9 @@
 		0141F8281AB0312200B66BF3 /* guangdiuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = guangdiuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0141F82D1AB0312200B66BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0141F82E1AB0312200B66BF3 /* guangdiuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = guangdiuTests.swift; sourceTree = "<group>"; };
+		6DA382A94AFF6B140858CF4E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		AE548E6822823E23F6E027D3 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F793E8B4186F4F0BAEADCE24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5880F85680D21B9C78CBDA5E /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,13 +69,15 @@
 				0141F8131AB0312100B66BF3 /* guangdiu */,
 				0141F82B1AB0312200B66BF3 /* guangdiuTests */,
 				0141F8121AB0312100B66BF3 /* Products */,
+				E4A9CEA95906381DC1D439AC /* Pods */,
+				3BC99D254014D9AA0A26D57B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		0141F8121AB0312100B66BF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0141F8111AB0312100B66BF3 /* guangdiu.app */,
+				0141F8111AB0312100B66BF3 /* 逛丢.app */,
 				0141F8281AB0312200B66BF3 /* guangdiuTests.xctest */,
 			);
 			name = Products;
@@ -115,6 +122,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		3BC99D254014D9AA0A26D57B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AE548E6822823E23F6E027D3 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4A9CEA95906381DC1D439AC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F793E8B4186F4F0BAEADCE24 /* Pods.debug.xcconfig */,
+				6DA382A94AFF6B140858CF4E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,9 +146,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0141F8321AB0312200B66BF3 /* Build configuration list for PBXNativeTarget "guangdiu" */;
 			buildPhases = (
+				529A3C9D40054398B8149BDB /* Check Pods Manifest.lock */,
 				0141F80D1AB0312100B66BF3 /* Sources */,
 				0141F80E1AB0312100B66BF3 /* Frameworks */,
 				0141F80F1AB0312100B66BF3 /* Resources */,
+				F58CC4956E342108146C169D /* Embed Pods Frameworks */,
+				49D3D83CB1C40A4AF0FDF48A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,7 +159,7 @@
 			);
 			name = guangdiu;
 			productName = guangdiu;
-			productReference = 0141F8111AB0312100B66BF3 /* guangdiu.app */;
+			productReference = 0141F8111AB0312100B66BF3 /* 逛丢.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0141F8271AB0312200B66BF3 /* guangdiuTests */ = {
@@ -209,6 +236,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49D3D83CB1C40A4AF0FDF48A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		529A3C9D40054398B8149BDB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F58CC4956E342108146C169D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0141F80D1AB0312100B66BF3 /* Sources */ = {
@@ -338,21 +413,23 @@
 		};
 		0141F8331AB0312200B66BF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F793E8B4186F4F0BAEADCE24 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = guangdiu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "逛丢";
 			};
 			name = Debug;
 		};
 		0141F8341AB0312200B66BF3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DA382A94AFF6B140858CF4E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = guangdiu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "逛丢";
 			};
 			name = Release;
 		};
@@ -371,7 +448,7 @@
 				INFOPLIST_FILE = guangdiuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/guangdiu.app/guangdiu";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/逛丢.app/逛丢";
 			};
 			name = Debug;
 		};
@@ -386,7 +463,7 @@
 				INFOPLIST_FILE = guangdiuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/guangdiu.app/guangdiu";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/逛丢.app/逛丢";
 			};
 			name = Release;
 		};
@@ -409,6 +486,7 @@
 				0141F8341AB0312200B66BF3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0141F8351AB0312200B66BF3 /* Build configuration list for PBXNativeTarget "guangdiuTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +495,7 @@
 				0141F8371AB0312200B66BF3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
