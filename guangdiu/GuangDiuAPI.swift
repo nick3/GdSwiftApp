@@ -52,7 +52,7 @@ class GuangDiuAPI {
     return "\(BasePath.baseURI)\(BasePath.loadCheapPath)"
   }
   private class var paramV: String {
-    let paramV = "1425537325223"
+    let paramV = "142553732523"
     return paramV
   }
   

@@ -102,8 +102,13 @@
                             </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="E4r-6x-3g3">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="segmentCtrl" destination="0Ol-aB-GaI" id="TRa-x9-sec"/>
+                        <segue destination="TT2-Sk-d86" kind="show" identifier="GoDetail" id="jAP-eA-saA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbZ-5Z-aMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -113,7 +118,7 @@
         <!--Detail View Controller-->
         <scene sceneID="elI-UX-2o3">
             <objects>
-                <viewController storyboardIdentifier="DetaiView" id="TT2-Sk-d86" customClass="DetailViewController" customModule="逛丢" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetaiView" hidesBottomBarWhenPushed="YES" id="TT2-Sk-d86" customClass="DetailViewController" customModule="逛丢" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n56-3r-jLL"/>
                         <viewControllerLayoutGuide type="bottom" id="7RC-Nw-Dsf"/>
@@ -122,15 +127,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxd-xI-YAn">
+                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxd-xI-YAn">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="TT2-Sk-d86" id="cfF-Cw-dhz"/>
+                                </connections>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="7RC-Nw-Dsf" firstAttribute="top" secondItem="kxd-xI-YAn" secondAttribute="bottom" id="49R-4f-JLs"/>
                             <constraint firstItem="kxd-xI-YAn" firstAttribute="leading" secondItem="Uu1-tP-owr" secondAttribute="leadingMargin" constant="-16" id="MgQ-ma-j37"/>
+                            <constraint firstItem="7RC-Nw-Dsf" firstAttribute="top" secondItem="kxd-xI-YAn" secondAttribute="bottom" constant="-49" id="Yzi-n1-AYh"/>
+                            <constraint firstItem="kxd-xI-YAn" firstAttribute="top" secondItem="n56-3r-jLL" secondAttribute="bottom" constant="-64" id="cbG-cD-Xfx"/>
                             <constraint firstAttribute="centerX" secondItem="kxd-xI-YAn" secondAttribute="centerX" id="lgq-7B-avc"/>
                             <constraint firstItem="kxd-xI-YAn" firstAttribute="top" secondItem="n56-3r-jLL" secondAttribute="bottom" constant="-20" id="nTu-oY-Xjo"/>
                             <constraint firstAttribute="centerY" secondItem="kxd-xI-YAn" secondAttribute="centerY" id="tbi-cV-zu3"/>
@@ -143,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AS3-nI-uvt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2407" y="-284"/>
+            <point key="canvasLocation" x="2407" y="-289"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="sxe-oW-oAj">

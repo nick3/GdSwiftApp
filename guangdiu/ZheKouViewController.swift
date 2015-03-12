@@ -18,12 +18,13 @@ class ZheKouViewController: UITableViewController {
   var pageNo = 1
   var isLoading = false
   var noData = false
+  var selectedIndex = -1
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
+     self.clearsSelectionOnViewWillAppear = false
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -107,22 +108,11 @@ class ZheKouViewController: UITableViewController {
     return cell!
   }
   
-//  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-////      let content = tableData[indexPath.row].title
-////      let padding: CGFloat = 20
-////      let width = tableView.frame.size.width - padding * 2
-////      let size = CGSizeMake(width, CGFloat.max)
-////      let attrs = [NSFontAttributeName: UIFont(name: "Helvetica", size: 14)!]
-////      let frame = content.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attrs, context: nil)
-//    return 240 //frame.size.height + 1
-//  }
-//  
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     NSLog("User seleted \(indexPath.row).")
-    var detailView = storyboard?.instantiateViewControllerWithIdentifier("DetaiView") as DetailViewController
-    detailView.setItem(tableData[indexPath.row])
-    navigationController?.pushViewController(detailView, animated: true)
-    
+    selectedIndex = indexPath.row
+    performSegueWithIdentifier("GoDetail", sender: self)
+//    navigationController?.showViewController(<#vc: UIViewController#>, sender: <#AnyObject!#>)
   }
 
   /*
@@ -160,14 +150,17 @@ class ZheKouViewController: UITableViewController {
   }
   */
 
-  /*
   // MARK: - Navigation
 
   // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       // Get the new view controller using [segue destinationViewController].
       // Pass the selected object to the new view controller.
+    let detailView = segue.destinationViewController as DetailViewController
+    if selectedIndex >= 0 {
+      detailView.setItem(tableData[selectedIndex])
+//      detailView.hidesBottomBarWhenPushed = true
+    }
   }
-  */
 
 }
