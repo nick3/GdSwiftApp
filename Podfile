@@ -8,6 +8,7 @@ pod 'SwiftTask', '~> 2.6.0'
 pod 'NJKScrollFullScreen', '~> 0.2.5'
 pod 'Dollar', '~> 2.1.0'
 pod 'Cent', '~> 2.1.0'
+pod 'SugarRecord/CoreData', :git => 'https://github.com/SugarRecord/SugarRecord.git'
 
 target 'guangdiu' do
 

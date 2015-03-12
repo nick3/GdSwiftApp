@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftTask
+import SugarRecord
 
 class ZheKouViewController: UITableViewController {
   @IBOutlet weak var segmentCtrl: UISegmentedControl!
@@ -31,6 +32,9 @@ class ZheKouViewController: UITableViewController {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     
     tableView.rowHeight = UITableViewAutomaticDimension
+    
+    let stack: DefaultCDStack = DefaultCDStack(databaseName: "Database.sqlite", automigrating: true)
+    SugarRecord.addStack(stack)
     
     getData(segement: 0)
   }

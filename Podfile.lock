@@ -7,6 +7,9 @@ PODS:
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
+  - SugarRecord/Core (1.0.7)
+  - SugarRecord/CoreData (1.0.7):
+    - SugarRecord/Core
   - SwiftTask (2.6.0)
 
 DEPENDENCIES:
@@ -15,7 +18,17 @@ DEPENDENCIES:
   - Dollar (~> 2.1.0)
   - NJKScrollFullScreen (~> 0.2.5)
   - SDWebImage (~> 3.7.1)
+  - SugarRecord/CoreData (from `https://github.com/SugarRecord/SugarRecord.git`)
   - SwiftTask (~> 2.6.0)
+
+EXTERNAL SOURCES:
+  SugarRecord:
+    :git: https://github.com/SugarRecord/SugarRecord.git
+
+CHECKOUT OPTIONS:
+  SugarRecord:
+    :commit: 8e7e44dd9aa6a426b7f2878b1b382112a857bb56
+    :git: https://github.com/SugarRecord/SugarRecord.git
 
 SPEC CHECKSUMS:
   Alamofire: 524225da382071ee3e6d0badd0ee4b4dc36740de
@@ -23,6 +36,7 @@ SPEC CHECKSUMS:
   Dollar: 9e9f96a3e037f3ba4278b0eae1095b110b55c238
   NJKScrollFullScreen: 9b0b98f04bcd4efd0ed121bffac4070cdfb2f010
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  SugarRecord: 9d55ce666e8161eacdc95c996173eb53eb6d3683
   SwiftTask: 141abe59dab678c8d62dce8f580d79ddc3af44e3
 
 COCOAPODS: 0.36.0
