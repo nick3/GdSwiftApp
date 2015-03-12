@@ -17,7 +17,9 @@ class ZheKouViewCell: UITableViewCell {
 
   override func awakeFromNib() {
       super.awakeFromNib()
-      // Initialization code
+    // Initialization code
+    mallLabel.layer.cornerRadius = 5
+    mallLabel.layer.backgroundColor = UIColor(red: 200.0/255, green: 200.0/255, blue: 200.0/255, alpha: 1.0).CGColor
   }
 
   override func setSelected(selected: Bool, animated: Bool) {

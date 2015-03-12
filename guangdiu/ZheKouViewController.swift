@@ -28,6 +28,8 @@ class ZheKouViewController: UITableViewController {
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     
+    tableView.rowHeight = UITableViewAutomaticDimension
+    
     getData(segement: 0)
   }
   
@@ -97,33 +99,29 @@ class ZheKouViewController: UITableViewController {
       let title = item.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
       let detail = item.detail.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
       let imgURL = NSURL(string: item.thumbnail)
-//      cell!.imageView.setHeight(90.0)
-//      cell!.imageView.setWidth(90.0)
       cell!.imgView.sd_setImageWithURL(imgURL, placeholderImage: UIImage(named: "DefaultIcon"))
       cell!.titleLabel.text = title
       cell!.descLabel.text = detail
-      cell!.mallLabel.layer.cornerRadius = 5
-      cell!.mallLabel.layer.backgroundColor = UIColor(red: 200.0/255, green: 200.0/255, blue: 200.0/255, alpha: 1.0).CGColor
       cell!.mallLabel.text = item.source
     }
     return cell!
   }
   
-  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//      let content = tableData[indexPath.row].title
-//      let padding: CGFloat = 20
-//      let width = tableView.frame.size.width - padding * 2
-//      let size = CGSizeMake(width, CGFloat.max)
-//      let attrs = [NSFontAttributeName: UIFont(name: "Helvetica", size: 14)!]
-//      let frame = content.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attrs, context: nil)
-    return 220 //frame.size.height + 1
-  }
-  
+//  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+////      let content = tableData[indexPath.row].title
+////      let padding: CGFloat = 20
+////      let width = tableView.frame.size.width - padding * 2
+////      let size = CGSizeMake(width, CGFloat.max)
+////      let attrs = [NSFontAttributeName: UIFont(name: "Helvetica", size: 14)!]
+////      let frame = content.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attrs, context: nil)
+//    return 240 //frame.size.height + 1
+//  }
+//  
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     NSLog("User seleted \(indexPath.row).")
     var detailView = storyboard?.instantiateViewControllerWithIdentifier("DetaiView") as DetailViewController
     detailView.setItem(tableData[indexPath.row])
-//    navigationController?.pushViewController(detailView, animated: true)
+    navigationController?.pushViewController(detailView, animated: true)
     
   }
 
