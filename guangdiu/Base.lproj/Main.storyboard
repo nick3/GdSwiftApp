@@ -180,7 +180,7 @@
         <scene sceneID="ucH-Nh-dUN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YLx-zC-1qu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="买买买" id="k1L-62-PHt"/>
+                    <tabBarItem key="tabBarItem" title="买买买" image="Star 1" id="k1L-62-PHt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TVB-hc-Q5D">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -197,6 +197,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Star 1" width="34" height="32"/>
         <image name="Star 2" width="34" height="32"/>
     </resources>
 </document>

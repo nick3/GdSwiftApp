@@ -16,11 +16,12 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = item.title
+    
     if let url = NSURL(string: item.mallPageURL) {
       var request = NSURLRequest(URL: url)
       webView.loadRequest(request)
-      navigationController?.navigationItem.title = "HAHA"
     }
+//    navigationController?.hidesBarsOnSwipe = true
     
     // Do any additional setup after loading the view.
   }
@@ -42,6 +43,4 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
   func setItem(let item: Item!) {
     self.item = item
   }
-  
-
 }
