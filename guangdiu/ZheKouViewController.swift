@@ -8,12 +8,16 @@
 
 import UIKit
 import SwiftTask
+import Realm
 
 class ZheKouViewController: UITableViewController {
   @IBOutlet weak var segmentCtrl: UISegmentedControl!
   
   let api = GuangDiuAPI()
-  var tableData = [Item]()
+  let db = DB()
+  var tableData = Item.allObjects().sortedResultsUsingProperty("id", ascending: false)
+  var estimatedRowHeightCache: [String: CGFloat]?
+  var notificationToken: RLMNotificationToken?
 
   var pageNo = 1
   var isLoading = false
@@ -22,6 +26,9 @@ class ZheKouViewController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    println(RLMRealm.defaultRealm().path)
+    
+    tableView.tableFooterView = UIView()
 
     // Uncomment the following line to preserve selection between presentations
      self.clearsSelectionOnViewWillAppear = false
@@ -31,15 +38,31 @@ class ZheKouViewController: UITableViewController {
     
     tableView.rowHeight = UITableViewAutomaticDimension
     
-    getData(segement: 0)
+    notificationToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
+      self.tableView.reloadData()
+    }
+    
+    tableView.reloadData()
+
+    if let refreshCtrl = refreshControl {
+      tableView.contentOffset = CGPointMake(0, -refreshCtrl.frame.size.height)
+      refreshCtrl.beginRefreshing()
+      getData(segement: 0, sender: refreshControl, clearDB: true)
+    }
   }
   
-  func getData(segement type: Int) {
+  func getData(segement type: Int, sender: UIRefreshControl? = nil, clearDB: Bool = false) {
     isLoading = true
     api.getShiShiZheKou(pageNo).success { (items) -> [Item] in
       if items.count > 0 {
-        self.tableData += items
-        self.tableView.reloadData()
+        let addItems = self.db.saveItems(items)
+        self.estimatedRowHeightCache = [:]
+        if let refreshCtrl = sender {
+          if clearDB {
+            self.db.clearItems()
+          }
+          refreshCtrl.endRefreshing()
+        }
       }
       else {
         self.noData = true
@@ -49,10 +72,40 @@ class ZheKouViewController: UITableViewController {
     }
   }
   
+  func getEstimatedCellHeightFromCache(indexPath: NSIndexPath, defaultHeight: CGFloat) -> CGFloat {
+    initEstimatedRowHeightCacheIfNeeded()
+    if let estimatedHeight = estimatedRowHeightCache?["\(indexPath.row)"] {
+      return estimatedHeight
+    }
+    else {
+      return defaultHeight
+    }
+  }
+  
+  func isEstimatedRowHeightInCache(indexPath: NSIndexPath) -> Bool {
+    if getEstimatedCellHeightFromCache(indexPath, defaultHeight: 0) > 0 {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+  
+  func initEstimatedRowHeightCacheIfNeeded() {
+    if estimatedRowHeightCache == nil {
+      estimatedRowHeightCache = [:]
+    }
+  }
+  
+  func putEstimatedCellHeightToCache(indexPath: NSIndexPath, height: CGFloat) {
+    initEstimatedRowHeightCacheIfNeeded()
+    estimatedRowHeightCache!["\(indexPath.row)"] = height
+  }
+  
   @IBAction func segmentChanged(sender: UISegmentedControl) {
     pageNo = 1
     noData = false
-    tableData = [Item]()
+//    tableData = [Item]()
     getData(segement: sender.selectedSegmentIndex)
   }
   
@@ -60,7 +113,6 @@ class ZheKouViewController: UITableViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-
   
   override func scrollViewDidScroll(scrollView: UIScrollView) {
     let offset = scrollView.contentOffset
@@ -77,9 +129,6 @@ class ZheKouViewController: UITableViewController {
       }
     }
   }
-  // MARK: - Table view data source
-  
-  
 
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
       // #warning Potentially incomplete method implementation.
@@ -88,31 +137,58 @@ class ZheKouViewController: UITableViewController {
   }
 
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tableData.count
+    let count = tableData.count
+    return Int(count)
+  }
+  
+  override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return getEstimatedCellHeightFromCache(indexPath, defaultHeight: 120)
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> ZheKouViewCell {
     var cell: ZheKouViewCell?
     cell = tableView.dequeueReusableCellWithIdentifier("DataCell") as? ZheKouViewCell
-    
-    if tableData.count > indexPath.row {
-      let item = tableData[indexPath.row]
-      let title = item.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-      let detail = item.detail.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    let data: AnyObject! = tableData[UInt(indexPath.row)]
+    if let item  = data as? Item {
+      let title = item.title
+      let detail = item.detail
       let imgURL = NSURL(string: item.thumbnail)
       cell!.imgView.sd_setImageWithURL(imgURL, placeholderImage: UIImage(named: "DefaultIcon"))
       cell!.titleLabel.text = title
       cell!.descLabel.text = detail
       cell!.mallLabel.text = item.source
     }
+    if !self.isEstimatedRowHeightInCache(indexPath) {
+      let cellSize = cell!.systemLayoutSizeFittingSize(CGSizeMake(view.frame.size.width, 0), withHorizontalFittingPriority:1000.0, verticalFittingPriority:50.0)
+      putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
+    }
     return cell!
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    NSLog("User seleted \(indexPath.row).")
     selectedIndex = indexPath.row
     performSegueWithIdentifier("GoDetail", sender: self)
 //    navigationController?.showViewController(<#vc: UIViewController#>, sender: <#AnyObject!#>)
+  }
+  
+  override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    return true
+  }
+  
+  override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+    var cell = tableView.cellForRowAtIndexPath(indexPath)
+    cell?.contentView.backgroundColor = UIColor(red:0.29, green:0.6, blue:0.22, alpha:0.2)
+    cell?.backgroundColor = UIColor(red:0.29, green:0.6, blue:0.22, alpha:0.2)
+  }
+  
+  override func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+    var cell = tableView.cellForRowAtIndexPath(indexPath)
+    cell?.contentView.backgroundColor = UIColor.whiteColor()
+    cell?.backgroundColor = UIColor.whiteColor()
+  }
+  
+  @IBAction func onRefresh(sender: UIRefreshControl) {
+    getData(segement: 0, sender: sender)
   }
 
   /*
@@ -158,7 +234,7 @@ class ZheKouViewController: UITableViewController {
       // Pass the selected object to the new view controller.
     let detailView = segue.destinationViewController as DetailViewController
     if selectedIndex >= 0 {
-      detailView.setItem(tableData[selectedIndex])
+      detailView.setItem(tableData[UInt(selectedIndex)] as Item)
 //      detailView.hidesBottomBarWhenPushed = true
     }
   }

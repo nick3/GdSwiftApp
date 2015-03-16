@@ -8,21 +8,12 @@
 
 import Foundation
 import Alamofire
-import Dollar
+import Cent
 import SwiftTask
 
 typealias Progress = (bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
 typealias AlamoFireTask = Task<Progress, String, NSError>
 typealias DataTask = Task<Progress, [Item], NSError>
-
-struct Item {
-    var title: String
-    var source: String
-    var time: String
-    var detail: String
-    var thumbnail: String
-    var mallPageURL: String
-}
 
 class GuangDiuAPI {
   private struct BasePath {
@@ -119,36 +110,44 @@ class GuangDiuAPI {
 //  }
   
   private func parseDataHTML(let html: String) -> [Item] {
-      var err: NSError?
-      var parser = HTMLParser(html: html, error: &err)
-      if err != nil {
-//          println(err)
-          exit(1)
-      }
-      var bodyNode = parser.body
-      var items = [Item]()
-      if let divNodes = bodyNode?.findChildTagsAttr("div", attrName: "class", attrValue: "item") {
-          for node in divNodes {
-              let title = node.findChildTagAttr("a", attrName: "class", attrValue: "title")?.contents ?? ""
-              let source = node.findChildTagAttr("div", attrName: "class", attrValue: "mallname")?.contents ?? ""
-              let time = node.findChildTagAttr("span", attrName: "class", attrValue: "latesttime")?.contents ?? ""
-              let detail = node.findChildTagAttr("div", attrName: "class", attrValue: "abstract")?.contents ?? ""
-              let thumbnailNode = node.findChildTagAttr("a", attrName: "class", attrValue: "thumbnail")
-              var mallPageURL = thumbnailNode?.getAttributeNamed("href") ?? ""
-              var thumbnail = thumbnailNode?.findChildTag("img")?.getAttributeNamed("src") ?? ""
-              
-              if !Regex("^http://").test(mallPageURL) {
-                  mallPageURL = GuangDiuAPI.BasePath.baseURI + "/" + mallPageURL
-              }
-              if !Regex("^http://").test(thumbnail) {
-                  thumbnail = GuangDiuAPI.BasePath.baseURI + "/" + thumbnail
-              }
-              
-              let item = Item(title: title, source: source, time: time, detail: detail, thumbnail: thumbnail, mallPageURL: mallPageURL)
-              items.append(item)
+    var err: NSError?
+    var parser = HTMLParser(html: html, error: &err)
+    if err != nil {
+      println(err)
+      exit(1)
+    }
+    var bodyNode = parser.body
+    var items = [Item]()
+    if let divNodes = bodyNode?.findChildTagsAttr("div", attrName: "class", attrValue: "item") {
+      for node in divNodes {
+        var id = -1
+        let titleNode = node.findChildTagAttr("a", attrName: "class", attrValue: "title")
+        if let titleHref = titleNode?.getAttributeNamed("href") {
+          let idStr = titleHref["(?<=id=)\\d+$"]
+          if let idInt = idStr?.toInt() {
+            id = idInt
           }
-      }
-      return items
+        }
+        let title = titleNode?.contents.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) ?? ""
+        let source = node.findChildTagAttr("div", attrName: "class", attrValue: "mallname")?.contents ?? ""
+        let time = node.findChildTagAttr("span", attrName: "class", attrValue: "latesttime")?.contents ?? ""
+        let detail = node.findChildTagAttr("div", attrName: "class", attrValue: "abstract")?.contents.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) ?? ""
+        let thumbnailNode = node.findChildTagAttr("a", attrName: "class", attrValue: "thumbnail")
+        var mallPageURL = thumbnailNode?.getAttributeNamed("href") ?? ""
+        var thumbnail = thumbnailNode?.findChildTag("img")?.getAttributeNamed("src") ?? ""
+        
+        if !Regex("^http://").test(mallPageURL) {
+            mallPageURL = GuangDiuAPI.BasePath.baseURI + "/" + mallPageURL
+        }
+        if !Regex("^http://").test(thumbnail) {
+            thumbnail = GuangDiuAPI.BasePath.baseURI + "/" + thumbnail
+        }
+        
+        let item = Item(id: id, title: title, source: source, time: time, detail: detail, thumbnail: thumbnail, mallPageURL: mallPageURL)
+        items.append(item)
+        }
+    }
+    return items
   }
   
 //  func parseRankHTML(let html: String) -> [Item] {
