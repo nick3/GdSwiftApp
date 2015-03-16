@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0114D9541AB6BBB500569438 /* FavItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0114D9531AB6BBB500569438 /* FavItem.swift */; };
+		0114D9561AB6CBD700569438 /* FavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0114D9551AB6CBD700569438 /* FavViewController.swift */; };
 		0125DE531AB664EA00436EFB /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125DE521AB664EA00436EFB /* RLMSupport.swift */; };
 		0125DE561AB6660200436EFB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125DE551AB6660200436EFB /* Item.swift */; };
 		0125DE581AB66C9200436EFB /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125DE571AB66C9200436EFB /* DB.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0114D9531AB6BBB500569438 /* FavItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavItem.swift; sourceTree = "<group>"; };
+		0114D9551AB6CBD700569438 /* FavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavViewController.swift; sourceTree = "<group>"; };
 		0125DE521AB664EA00436EFB /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		0125DE551AB6660200436EFB /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		0125DE571AB66C9200436EFB /* DB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				0125DE551AB6660200436EFB /* Item.swift */,
+				0114D9531AB6BBB500569438 /* FavItem.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -128,6 +133,7 @@
 				0141F8141AB0312100B66BF3 /* Supporting Files */,
 				019104D21AB0A870009AE130 /* ZheKouViewCell.swift */,
 				0125DE571AB66C9200436EFB /* DB.swift */,
+				0114D9551AB6CBD700569438 /* FavViewController.swift */,
 			);
 			path = guangdiu;
 			sourceTree = "<group>";
@@ -354,6 +360,8 @@
 				0125DE581AB66C9200436EFB /* DB.swift in Sources */,
 				019104D31AB0A870009AE130 /* ZheKouViewCell.swift in Sources */,
 				0125DE531AB664EA00436EFB /* RLMSupport.swift in Sources */,
+				0114D9561AB6CBD700569438 /* FavViewController.swift in Sources */,
+				0114D9541AB6BBB500569438 /* FavItem.swift in Sources */,
 				0141F8421AB03DB400B66BF3 /* UIViewExt.swift in Sources */,
 				0141F83C1AB03C7900B66BF3 /* HTMLNode.swift in Sources */,
 				016230DC1AB0478C0063809D /* ZheKouViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  Item.swift
+//  FavItem.swift
 //  guangdiu
 //
 //  Created by Nick on 15/3/16.
@@ -8,7 +8,7 @@
 
 import Realm
 
-class Item: RLMObject {
+class FavItem: RLMObject {
   
   dynamic var id = -1
   dynamic var title = ""
@@ -17,8 +17,9 @@ class Item: RLMObject {
   dynamic var detail = ""
   dynamic var thumbnail = ""
   dynamic var mallPageURL = ""
+  dynamic var favTime =  NSDate()
   
-  convenience init(item: FavItem) {
+  convenience init(item: Item) {
     self.init()
     self.id = item.id
     self.title = item.title

@@ -1,41 +1,31 @@
 //
-//  ZheKouViewController.swift
+//  FavViewController.swift
 //  guangdiu
 //
-//  Created by Nick on 15/3/11.
+//  Created by Nick on 15/3/16.
 //  Copyright (c) 2015年 Nick. All rights reserved.
 //
 
 import UIKit
-import SwiftTask
 import Realm
 
-class ZheKouViewController: UITableViewController {
-  @IBOutlet weak var segmentCtrl: UISegmentedControl!
-  
-  let api = GuangDiuAPI()
+class FavViewController: UITableViewController {
   let db = DB()
-  var tableData = Item.allObjects().sortedResultsUsingProperty("id", ascending: false)
+  var tableData = FavItem.allObjects().sortedResultsUsingProperty("favTime", ascending: false)
   var estimatedRowHeightCache: [String: CGFloat]?
   var notificationToken: RLMNotificationToken?
-
-  var pageNo = 1
-  var isLoading = false
-  var noData = false
   var selectedIndex = -1
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    println(RLMRealm.defaultRealm().path)
-    
-    tableView.tableFooterView = UIView()
 
-    // Uncomment the following line to preserve selection between presentations
-    clearsSelectionOnViewWillAppear = false
+      // Uncomment the following line to preserve selection between presentations
+      // self.clearsSelectionOnViewWillAppear = false
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+      // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    
+    tableView.tableFooterView = UIView()
+    clearsSelectionOnViewWillAppear = false
     tableView.rowHeight = UITableViewAutomaticDimension
     
     notificationToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
@@ -43,35 +33,8 @@ class ZheKouViewController: UITableViewController {
     }
     
     tableView.reloadData()
+  }
 
-    if let refreshCtrl = refreshControl {
-      tableView.contentOffset = CGPointMake(0, -refreshCtrl.frame.size.height)
-      refreshCtrl.beginRefreshing()
-      getData(segement: 0, sender: refreshControl, clearDB: true)
-    }
-  }
-  
-  func getData(segement type: Int, sender: UIRefreshControl? = nil, clearDB: Bool = false) {
-    isLoading = true
-    api.getShiShiZheKou(pageNo).success { (items) -> [Item] in
-      if items.count > 0 {
-        if let refreshCtrl = sender {
-          if clearDB {
-            self.db.clearItems()
-          }
-          refreshCtrl.endRefreshing()
-        }
-        let addItems = self.db.saveItems(items)
-        self.estimatedRowHeightCache = [:]
-      }
-      else {
-        self.noData = true
-      }
-      self.isLoading = false
-      return items
-    }
-  }
-  
   func getEstimatedCellHeightFromCache(indexPath: NSIndexPath, defaultHeight: CGFloat) -> CGFloat {
     initEstimatedRowHeightCacheIfNeeded()
     if let estimatedHeight = estimatedRowHeightCache?["\(indexPath.row)"] {
@@ -102,33 +65,12 @@ class ZheKouViewController: UITableViewController {
     estimatedRowHeightCache!["\(indexPath.row)"] = height
   }
   
-  @IBAction func segmentChanged(sender: UISegmentedControl) {
-    pageNo = 1
-    noData = false
-//    tableData = [Item]()
-    getData(segement: sender.selectedSegmentIndex)
-  }
-  
   override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+      super.didReceiveMemoryWarning()
+      // Dispose of any resources that can be recreated.
   }
-  
-  override func scrollViewDidScroll(scrollView: UIScrollView) {
-    let offset = scrollView.contentOffset
-    let bounds = scrollView.bounds
-    let size = scrollView.contentSize
-    let inset = scrollView.contentInset
-    let y = offset.y + bounds.size.height - inset.bottom
-    let h = size.height
-    let reload_distance: CGFloat = 10
-    if y > h + reload_distance {
-      if !noData && !isLoading {
-        pageNo++
-        getData(segement: segmentCtrl.selectedSegmentIndex)
-      }
-    }
-  }
+
+  // MARK: - Table view data source
 
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
       // #warning Potentially incomplete method implementation.
@@ -137,6 +79,8 @@ class ZheKouViewController: UITableViewController {
   }
 
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      // #warning Incomplete method implementation.
+      // Return the number of rows in the section.
     let count = tableData.count
     return Int(count)
   }
@@ -144,40 +88,38 @@ class ZheKouViewController: UITableViewController {
   override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     return getEstimatedCellHeightFromCache(indexPath, defaultHeight: 120)
   }
-  
+
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> ZheKouViewCell {
     var cell = tableView.dequeueReusableCellWithIdentifier("DataCell") as? ZheKouViewCell
-    let data: AnyObject! = tableData[UInt(indexPath.row)]
-    if let item  = data as? Item {
-      cell?.cellOriginData = item
-      let title = item.title
-      let detail = item.detail
-      let imgURL = NSURL(string: item.thumbnail)
-      cell!.imgView.sd_setImageWithURL(imgURL, placeholderImage: UIImage(named: "DefaultIcon"))
-      cell!.titleLabel.text = title
-      cell!.descLabel.text = detail
-      cell!.mallLabel.text = item.source
-      let isFaved = db.isThisItemFaved(item)
-      if isFaved {
-//        cell?.favBtn.titleLabel?.text = "已收藏"
-        cell?.favBtn.selected = true
+    if cell != nil {
+      let data: AnyObject! = tableData[UInt(indexPath.row)]
+      if let favItem = data as? FavItem {
+        let item = Item(item: favItem)
+        cell?.cellOriginData = item
+        let title = item.title
+        let detail = item.detail
+        let imgURL = NSURL(string: item.thumbnail)
+        cell!.imgView.sd_setImageWithURL(imgURL, placeholderImage: UIImage(named: "DefaultIcon"))
+        cell!.titleLabel.text = title
+        cell!.descLabel.text = detail
+        cell!.mallLabel.text = item.source
+        let isFaved = db.isThisItemFaved(item)
+        if isFaved {
+          cell?.favBtn.selected = true
+        }
+        else {
+          cell?.favBtn.selected = false
+        }
       }
-      else {
-//        cell?.favBtn.titleLabel?.text = "收藏"
-        cell?.favBtn.selected = false
+      if !self.isEstimatedRowHeightInCache(indexPath) {
+        let cellSize = cell!.systemLayoutSizeFittingSize(CGSizeMake(view.frame.size.width, 0), withHorizontalFittingPriority:1000.0, verticalFittingPriority:50.0)
+        putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
       }
     }
-    if !self.isEstimatedRowHeightInCache(indexPath) {
-      let cellSize = cell!.systemLayoutSizeFittingSize(CGSizeMake(view.frame.size.width, 0), withHorizontalFittingPriority:1000.0, verticalFittingPriority:50.0)
-      putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
+    else {
+      cell = ZheKouViewCell()
     }
     return cell!
-  }
-  
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    selectedIndex = indexPath.row
-    performSegueWithIdentifier("GoDetail", sender: self)
-//    navigationController?.showViewController(<#vc: UIViewController#>, sender: <#AnyObject!#>)
   }
   
   override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -194,10 +136,6 @@ class ZheKouViewController: UITableViewController {
     var cell = tableView.cellForRowAtIndexPath(indexPath)
     cell?.contentView.backgroundColor = UIColor.whiteColor()
     cell?.backgroundColor = UIColor.whiteColor()
-  }
-  
-  @IBAction func onRefresh(sender: UIRefreshControl) {
-    getData(segement: 0, sender: sender)
   }
 
   /*
@@ -240,12 +178,10 @@ class ZheKouViewController: UITableViewController {
   // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       // Get the new view controller using [segue destinationViewController].
-      // Pass the selected object to the new view controller.
+    // Pass the selected object to the new view controller.
     let detailView = segue.destinationViewController as DetailViewController
     if selectedIndex >= 0 {
       detailView.setItem(tableData[UInt(selectedIndex)] as Item)
-//      detailView.hidesBottomBarWhenPushed = true
     }
   }
-
 }

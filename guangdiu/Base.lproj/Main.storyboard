@@ -19,37 +19,27 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x2P-g0-kEG" id="GZc-yi-qrV">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6js-hQ-ZLG">
-                                            <rect key="frame" x="16" y="11" width="568" height="22"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6js-hQ-ZLG">
+                                            <rect key="frame" x="16" y="12" width="568" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" red="0.1764705926" green="0.20000001789999999" blue="0.231372565" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GTO-ry-E4P">
-                                            <rect key="frame" x="16" y="41" width="90" height="90"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GTO-ry-E4P">
+                                            <rect key="frame" x="16" y="42" width="90" height="90"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="4df-gt-bCE"/>
                                                 <constraint firstAttribute="height" constant="90" id="eKR-hB-ES0"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Desc" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ana-NV-EoV">
-                                            <rect key="frame" x="123" y="48" width="461" height="21"/>
+                                            <rect key="frame" x="123" y="49" width="461" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMA-OS-Ti6">
-                                            <rect key="frame" x="498" y="141" width="70" height="32"/>
-                                            <state key="normal" title="收藏">
-                                                <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="selected" image="Star 2">
-                                                <color key="titleColor" red="0.94117647058823528" green="0.58431372549019611" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8kt-xQ-Ic3">
-                                            <rect key="frame" x="16" y="146" width="90" height="21"/>
+                                            <rect key="frame" x="16" y="147" width="90" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="PhM-dW-ld4"/>
                                             </constraints>
@@ -57,6 +47,19 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="SMA-OS-Ti6">
+                                            <rect key="frame" x="495" y="136" width="89" height="32"/>
+                                            <state key="normal" title="收藏" image="Star 1">
+                                                <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" title="已收藏" image="Star 2">
+                                                <color key="titleColor" red="0.94117647058823528" green="0.58431372549019611" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onFavBtnTapped:" destination="x2P-g0-kEG" eventType="touchUpInside" id="gxO-Qo-PQ8"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="ana-NV-EoV" secondAttribute="trailing" constant="8" id="A22-j0-W0s"/>
@@ -68,11 +71,11 @@
                                         <constraint firstItem="SMA-OS-Ti6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ana-NV-EoV" secondAttribute="bottom" constant="10" id="ZYG-ez-XL5"/>
                                         <constraint firstItem="8kt-xQ-Ic3" firstAttribute="width" secondItem="GTO-ry-E4P" secondAttribute="width" id="cDk-FL-Mte"/>
                                         <constraint firstItem="6js-hQ-ZLG" firstAttribute="top" secondItem="GZc-yi-qrV" secondAttribute="topMargin" constant="3" id="ctb-l4-Ude"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="SMA-OS-Ti6" secondAttribute="trailing" constant="24" id="fp8-Jq-Hwr"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="SMA-OS-Ti6" secondAttribute="trailing" constant="8" id="fp8-Jq-Hwr"/>
                                         <constraint firstItem="6js-hQ-ZLG" firstAttribute="leading" secondItem="GZc-yi-qrV" secondAttribute="leadingMargin" constant="8" id="jqC-Xr-OFQ"/>
                                         <constraint firstItem="GTO-ry-E4P" firstAttribute="leading" secondItem="GZc-yi-qrV" secondAttribute="leadingMargin" constant="8" id="kGe-Yo-0XS"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="8kt-xQ-Ic3" secondAttribute="bottom" constant="4" id="qlo-xo-YEz"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="SMA-OS-Ti6" secondAttribute="bottom" constant="-4" id="seZ-nM-Y3J"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="SMA-OS-Ti6" secondAttribute="bottom" constant="4" id="seZ-nM-Y3J"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="6js-hQ-ZLG" secondAttribute="trailing" constant="8" id="zyR-UU-4Gn"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -120,7 +123,34 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbZ-5Z-aMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1715" y="-289"/>
+            <point key="canvasLocation" x="1715" y="-286"/>
+        </scene>
+        <!--我的收藏-->
+        <scene sceneID="o2q-cf-nUl">
+            <objects>
+                <tableViewController id="27o-mM-Qvy" customClass="FavViewController" customModule="逛丢" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1a4-f5-Ack">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9w9-BN-C2W">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9w9-BN-C2W" id="YHd-Ch-bKS">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="27o-mM-Qvy" id="xwH-MO-201"/>
+                            <outlet property="delegate" destination="27o-mM-Qvy" id="6T3-o5-ing"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="我的收藏" id="GQy-Lc-fvQ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="te5-l4-Htm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1715" y="462"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="elI-UX-2o3">
@@ -156,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AS3-nI-uvt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2407" y="-289"/>
+            <point key="canvasLocation" x="2504" y="-284"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="sxe-oW-oAj">
@@ -170,6 +200,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="YLx-zC-1qu" kind="relationship" relationship="viewControllers" id="sPS-Ah-4gr"/>
+                        <segue destination="hFW-sD-ceE" kind="relationship" relationship="viewControllers" id="gPW-C4-2QS"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eNi-XY-CLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,7 +211,7 @@
         <scene sceneID="ucH-Nh-dUN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YLx-zC-1qu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="买买买" image="Star 1" id="k1L-62-PHt"/>
+                    <tabBarItem key="tabBarItem" title="买买买" image="first" id="k1L-62-PHt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TVB-hc-Q5D">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -195,9 +226,29 @@
             </objects>
             <point key="canvasLocation" x="903" y="-284"/>
         </scene>
+        <!--我的收藏-->
+        <scene sceneID="2Ns-i4-8eQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hFW-sD-ceE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="我的收藏" image="Star 2" id="gym-L7-pxB"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vcb-EC-hdv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="27o-mM-Qvy" kind="relationship" relationship="rootViewController" id="akH-KC-GQl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eUH-fy-0jp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="903" y="462"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Star 1" width="34" height="32"/>
         <image name="Star 2" width="34" height="32"/>
+        <image name="first" width="30" height="30"/>
     </resources>
 </document>
