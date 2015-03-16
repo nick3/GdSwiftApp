@@ -18,6 +18,17 @@ class Item: RLMObject {
   dynamic var thumbnail = ""
   dynamic var mallPageURL = ""
   
+  convenience init(item: FavItem) {
+    self.init()
+    self.id = item.id
+    self.title = item.title
+    self.source = item.source
+    self.time = item.time
+    self.detail = item.detail
+    self.thumbnail = item.thumbnail
+    self.mallPageURL = item.mallPageURL
+  }
+  
   convenience init(id: Int, title: String, source: String, time: String, detail: String, thumbnail: String, mallPageURL: String) {
     self.init()
     self.id = id
