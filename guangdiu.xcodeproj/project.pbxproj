@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0125DE531AB664EA00436EFB /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125DE521AB664EA00436EFB /* RLMSupport.swift */; };
 		0141F8171AB0312100B66BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141F8161AB0312100B66BF3 /* AppDelegate.swift */; };
 		0141F81E1AB0312100B66BF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0141F81C1AB0312100B66BF3 /* Main.storyboard */; };
 		0141F8201AB0312100B66BF3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0141F81F1AB0312100B66BF3 /* Images.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0125DE521AB664EA00436EFB /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		0141F8111AB0312100B66BF3 /* 逛丢.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "逛丢.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0141F8151AB0312100B66BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0141F8161AB0312100B66BF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				016230DB1AB0478C0063809D /* ZheKouViewController.swift */,
 				016230D51AB046470063809D /* DetailViewController.swift */,
 				0141F81C1AB0312100B66BF3 /* Main.storyboard */,
+				0125DE521AB664EA00436EFB /* RLMSupport.swift */,
 				0141F81F1AB0312100B66BF3 /* Images.xcassets */,
 				0141F8211AB0312100B66BF3 /* LaunchScreen.xib */,
 				0141F8141AB0312100B66BF3 /* Supporting Files */,
@@ -320,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				019104D31AB0A870009AE130 /* ZheKouViewCell.swift in Sources */,
+				0125DE531AB664EA00436EFB /* RLMSupport.swift in Sources */,
 				0141F8421AB03DB400B66BF3 /* UIViewExt.swift in Sources */,
 				0141F83C1AB03C7900B66BF3 /* HTMLNode.swift in Sources */,
 				016230DC1AB0478C0063809D /* ZheKouViewController.swift in Sources */,
