@@ -33,10 +33,52 @@ class DB {
     return items
   }
   
+  func loadFavs() -> RLMResults {
+    let items = FavItem.allObjects()
+    return items
+  }
+  
   func clearItems() {
     realm.beginWriteTransaction()
     realm.deleteObjects(loadItems())
     realm.commitWriteTransaction()
+  }
+  
+  func addFav(item: Item) -> Bool {
+    let isFaved = isThisItemFaved(item)
+    if !isFaved {
+      let fav = FavItem(item: item)
+      realm.beginWriteTransaction()
+      realm.addObject(fav)
+      realm.commitWriteTransaction()
+    }
+    return isFaved
+  }
+  
+  func removeFav(item: Item) -> Bool {
+    var isFaved = true
+    let results = FavItem.objectsWhere("id=\(item.id)")
+    if results.count > 0 {
+      realm.beginWriteTransaction()
+      realm.deleteObjects(results)
+      realm.commitWriteTransaction()
+    }
+    else {
+      isFaved = false
+    }
+    return isFaved
+  }
+  
+  func isThisItemFaved(item: Item) -> Bool {
+    let allFavs = loadFavs()
+    for fav in allFavs {
+      if let favItem = fav as? FavItem {
+        if favItem.id == item.id {
+          return true
+        }
+      }
+    }
+    return false
   }
 }
 

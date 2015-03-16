@@ -55,14 +55,14 @@ class ZheKouViewController: UITableViewController {
     isLoading = true
     api.getShiShiZheKou(pageNo).success { (items) -> [Item] in
       if items.count > 0 {
-        let addItems = self.db.saveItems(items)
-        self.estimatedRowHeightCache = [:]
         if let refreshCtrl = sender {
           if clearDB {
             self.db.clearItems()
           }
           refreshCtrl.endRefreshing()
         }
+        let addItems = self.db.saveItems(items)
+        self.estimatedRowHeightCache = [:]
       }
       else {
         self.noData = true
@@ -150,6 +150,7 @@ class ZheKouViewController: UITableViewController {
     cell = tableView.dequeueReusableCellWithIdentifier("DataCell") as? ZheKouViewCell
     let data: AnyObject! = tableData[UInt(indexPath.row)]
     if let item  = data as? Item {
+      cell?.cellOriginData = item
       let title = item.title
       let detail = item.detail
       let imgURL = NSURL(string: item.thumbnail)
@@ -157,6 +158,15 @@ class ZheKouViewController: UITableViewController {
       cell!.titleLabel.text = title
       cell!.descLabel.text = detail
       cell!.mallLabel.text = item.source
+      let isFaved = db.isThisItemFaved(item)
+      if isFaved {
+//        cell?.favBtn.titleLabel?.text = "已收藏"
+        cell?.favBtn.selected = true
+      }
+      else {
+//        cell?.favBtn.titleLabel?.text = "收藏"
+        cell?.favBtn.selected = false
+      }
     }
     if !self.isEstimatedRowHeightInCache(indexPath) {
       let cellSize = cell!.systemLayoutSizeFittingSize(CGSizeMake(view.frame.size.width, 0), withHorizontalFittingPriority:1000.0, verticalFittingPriority:50.0)

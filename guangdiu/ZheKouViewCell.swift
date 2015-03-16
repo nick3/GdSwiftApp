@@ -14,9 +14,13 @@ class ZheKouViewCell: UITableViewCell {
   @IBOutlet weak var favBtn: UIButton!
   @IBOutlet weak var imgView: UIImageView!
   @IBOutlet weak var mallLabel: UILabel!
+  
+  var cellOriginData: Item?
+  let db = DB()
+  
 
   override func awakeFromNib() {
-      super.awakeFromNib()
+    super.awakeFromNib()
     // Initialization code
     mallLabel.layer.cornerRadius = 5
     mallLabel.layer.backgroundColor = UIColor(red: 200.0/255, green: 200.0/255, blue: 200.0/255, alpha: 1.0).CGColor
@@ -26,4 +30,15 @@ class ZheKouViewCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
 
+  @IBAction func onFavBtnTapped(sender: UIButton) {
+//    println("FAV!")
+    if let item = cellOriginData {
+      if favBtn.selected {
+        db.removeFav(item)
+      }
+      else {
+        db.addFav(item)
+      }
+    }
+  }
 }
