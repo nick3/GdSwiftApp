@@ -15,16 +15,6 @@ typealias Progress = (bytesWritten: Int64, totalBytesWritten: Int64, totalBytesE
 typealias AlamoFireTask = Task<Progress, String, NSError>
 typealias DataTask = Task<Progress, [Item], NSError>
 
-struct Item {
-  var id: Int
-  var title: String
-  var source: String
-  var time: String
-  var detail: String
-  var thumbnail: String
-  var mallPageURL: String
-}
-
 class GuangDiuAPI {
   private struct BasePath {
     static let baseURI = "http://guangdiu.com/m"
@@ -123,22 +113,25 @@ class GuangDiuAPI {
     var err: NSError?
     var parser = HTMLParser(html: html, error: &err)
     if err != nil {
-//          println(err)
-        exit(1)
+      println(err)
+      exit(1)
     }
     var bodyNode = parser.body
     var items = [Item]()
     if let divNodes = bodyNode?.findChildTagsAttr("div", attrName: "class", attrValue: "item") {
       for node in divNodes {
-        let idStr = node.findChildTagAttr("span", attrName: "class", attrValue: "idnum")?.contents ?? "-1"
         var id = -1
-        if let idInt = idStr.toInt() {
-          id = idInt
+        let titleNode = node.findChildTagAttr("a", attrName: "class", attrValue: "title")
+        if let titleHref = titleNode?.getAttributeNamed("href") {
+          let idStr = titleHref["(?<=id=)\\d+$"]
+          if let idInt = idStr?.toInt() {
+            id = idInt
+          }
         }
-        let title = node.findChildTagAttr("a", attrName: "class", attrValue: "title")?.contents ?? ""
+        let title = titleNode?.contents.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) ?? ""
         let source = node.findChildTagAttr("div", attrName: "class", attrValue: "mallname")?.contents ?? ""
         let time = node.findChildTagAttr("span", attrName: "class", attrValue: "latesttime")?.contents ?? ""
-        let detail = node.findChildTagAttr("div", attrName: "class", attrValue: "abstract")?.contents ?? ""
+        let detail = node.findChildTagAttr("div", attrName: "class", attrValue: "abstract")?.contents.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) ?? ""
         let thumbnailNode = node.findChildTagAttr("a", attrName: "class", attrValue: "thumbnail")
         var mallPageURL = thumbnailNode?.getAttributeNamed("href") ?? ""
         var thumbnail = thumbnailNode?.findChildTag("img")?.getAttributeNamed("src") ?? ""

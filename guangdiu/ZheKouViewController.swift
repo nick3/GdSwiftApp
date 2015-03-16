@@ -8,14 +8,16 @@
 
 import UIKit
 import SwiftTask
-import SugarRecord
+import Realm
 
 class ZheKouViewController: UITableViewController {
   @IBOutlet weak var segmentCtrl: UISegmentedControl!
   
   let api = GuangDiuAPI()
-  var tableData = [Item]()
+  let db = DB()
+  var tableData = Item.allObjects().sortedResultsUsingProperty("id", ascending: false)
   var estimatedRowHeightCache: [String: CGFloat]?
+  var notificationToken: RLMNotificationToken?
 
   var pageNo = 1
   var isLoading = false
@@ -24,6 +26,9 @@ class ZheKouViewController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    println(RLMRealm.defaultRealm().path)
+    
+    tableView.tableFooterView = UIView()
 
     // Uncomment the following line to preserve selection between presentations
      self.clearsSelectionOnViewWillAppear = false
@@ -33,23 +38,31 @@ class ZheKouViewController: UITableViewController {
     
     tableView.rowHeight = UITableViewAutomaticDimension
     
-    let stack: DefaultCDStack = DefaultCDStack(databaseName: "Database.sqlite", automigrating: true)
-    SugarRecord.addStack(stack)
+    notificationToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
+      self.tableView.reloadData()
+    }
     
-    getData(segement: 0)
+    tableView.reloadData()
+
+    if let refreshCtrl = refreshControl {
+      tableView.contentOffset = CGPointMake(0, -refreshCtrl.frame.size.height)
+      refreshCtrl.beginRefreshing()
+      getData(segement: 0, sender: refreshControl, clearDB: true)
+    }
   }
   
-  func getData(segement type: Int, resetData: Bool = false, sender: UIRefreshControl? = nil) {
+  func getData(segement type: Int, sender: UIRefreshControl? = nil, clearDB: Bool = false) {
     isLoading = true
     api.getShiShiZheKou(pageNo).success { (items) -> [Item] in
       if items.count > 0 {
-        if resetData {
-          self.tableData = [Item]()
-        }
-        self.tableData += items
+        let addItems = self.db.saveItems(items)
         self.estimatedRowHeightCache = [:]
-        self.tableView.reloadData()
-        sender?.endRefreshing()
+        if let refreshCtrl = sender {
+          if clearDB {
+            self.db.clearItems()
+          }
+          refreshCtrl.endRefreshing()
+        }
       }
       else {
         self.noData = true
@@ -92,7 +105,7 @@ class ZheKouViewController: UITableViewController {
   @IBAction func segmentChanged(sender: UISegmentedControl) {
     pageNo = 1
     noData = false
-    tableData = [Item]()
+//    tableData = [Item]()
     getData(segement: sender.selectedSegmentIndex)
   }
   
@@ -124,7 +137,8 @@ class ZheKouViewController: UITableViewController {
   }
 
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tableData.count
+    let count = tableData.count
+    return Int(count)
   }
   
   override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -134,11 +148,10 @@ class ZheKouViewController: UITableViewController {
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> ZheKouViewCell {
     var cell: ZheKouViewCell?
     cell = tableView.dequeueReusableCellWithIdentifier("DataCell") as? ZheKouViewCell
-    
-    if tableData.count > indexPath.row {
-      let item = tableData[indexPath.row]
-      let title = item.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-      let detail = item.detail.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    let data: AnyObject! = tableData[UInt(indexPath.row)]
+    if let item  = data as? Item {
+      let title = item.title
+      let detail = item.detail
       let imgURL = NSURL(string: item.thumbnail)
       cell!.imgView.sd_setImageWithURL(imgURL, placeholderImage: UIImage(named: "DefaultIcon"))
       cell!.titleLabel.text = title
@@ -175,7 +188,7 @@ class ZheKouViewController: UITableViewController {
   }
   
   @IBAction func onRefresh(sender: UIRefreshControl) {
-    getData(segement: 0, resetData: true, sender: sender)
+    getData(segement: 0, sender: sender)
   }
 
   /*
@@ -221,7 +234,7 @@ class ZheKouViewController: UITableViewController {
       // Pass the selected object to the new view controller.
     let detailView = segue.destinationViewController as DetailViewController
     if selectedIndex >= 0 {
-      detailView.setItem(tableData[selectedIndex])
+      detailView.setItem(tableData[UInt(selectedIndex)] as Item)
 //      detailView.hidesBottomBarWhenPushed = true
     }
   }

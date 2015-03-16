@@ -11,7 +11,7 @@ import UIKit
 class DetailViewController: UIViewController, UIWebViewDelegate {
     
   @IBOutlet weak var webView: UIWebView!
-  var item: Item = Item(id: -1, title: "", source: "", time: "", detail: "", thumbnail: "", mallPageURL: "")
+  var item: Item = Item()
 
   override func viewDidLoad() {
     super.viewDidLoad()
