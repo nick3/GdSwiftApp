@@ -25,6 +25,7 @@
 		016230D61AB046470063809D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016230D51AB046470063809D /* DetailViewController.swift */; };
 		016230DC1AB0478C0063809D /* ZheKouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016230DB1AB0478C0063809D /* ZheKouViewController.swift */; };
 		019104D31AB0A870009AE130 /* ZheKouViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019104D21AB0A870009AE130 /* ZheKouViewCell.swift */; };
+		01DD87281ABACE4D00386B0A /* FloatBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD87271ABACE4D00386B0A /* FloatBtn.swift */; };
 		5880F85680D21B9C78CBDA5E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE548E6822823E23F6E027D3 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		016230D51AB046470063809D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		016230DB1AB0478C0063809D /* ZheKouViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZheKouViewController.swift; sourceTree = "<group>"; };
 		019104D21AB0A870009AE130 /* ZheKouViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZheKouViewCell.swift; sourceTree = "<group>"; };
+		01DD87271ABACE4D00386B0A /* FloatBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatBtn.swift; sourceTree = "<group>"; };
 		6DA382A94AFF6B140858CF4E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AE548E6822823E23F6E027D3 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F793E8B4186F4F0BAEADCE24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				016230DB1AB0478C0063809D /* ZheKouViewController.swift */,
 				016230D51AB046470063809D /* DetailViewController.swift */,
 				0141F81C1AB0312100B66BF3 /* Main.storyboard */,
+				01DD87271ABACE4D00386B0A /* FloatBtn.swift */,
 				0125DE521AB664EA00436EFB /* RLMSupport.swift */,
 				0141F81F1AB0312100B66BF3 /* Images.xcassets */,
 				0141F8211AB0312100B66BF3 /* LaunchScreen.xib */,
@@ -355,6 +358,7 @@
 				016230D61AB046470063809D /* DetailViewController.swift in Sources */,
 				0141F8171AB0312100B66BF3 /* AppDelegate.swift in Sources */,
 				0141F83D1AB03C7900B66BF3 /* HTMLParser.swift in Sources */,
+				01DD87281ABACE4D00386B0A /* FloatBtn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

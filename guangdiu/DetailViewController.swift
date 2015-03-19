@@ -11,6 +11,7 @@ import TUSafariActivity
 
 class DetailViewController: UIViewController, UIWebViewDelegate {
     
+  @IBOutlet var floatBtns: [FloatBtn]!
   @IBOutlet weak var webView: UIWebView!
   var item: Item = Item()
 
@@ -43,6 +44,10 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
   
   func setItem(let item: Item!) {
     self.item = item
+  }
+  
+  @IBAction func moreBtnPressed(sender: UIBarButtonItem) {
+    println("count: \(floatBtns.count)")
   }
   
   @IBAction func shareBtnPressed(sender: UIBarButtonItem) {
