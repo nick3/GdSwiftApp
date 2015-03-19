@@ -152,7 +152,7 @@
             </objects>
             <point key="canvasLocation" x="1715" y="462"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Title-->
         <scene sceneID="elI-UX-2o3">
             <objects>
                 <viewController storyboardIdentifier="DetaiView" hidesBottomBarWhenPushed="YES" id="TT2-Sk-d86" customClass="DetailViewController" customModule="逛丢" customModuleProvider="target" sceneMemberID="viewController">
@@ -180,6 +180,14 @@
                             <constraint firstItem="kxd-xI-YAn" firstAttribute="top" secondItem="Uu1-tP-owr" secondAttribute="top" id="qot-6d-Kdj"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="uO7-gF-d2f">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="4vm-YF-MXr">
+                            <color key="tintColor" red="0.050489767929999999" green="0.72516134509999997" blue="0.15591280860000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="shareBtnPressed:" destination="TT2-Sk-d86" id="sPW-7B-Y2G"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="webView" destination="kxd-xI-YAn" id="8jd-md-uBT"/>
                     </connections>

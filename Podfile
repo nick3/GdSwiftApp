@@ -7,6 +7,7 @@ pod 'SDWebImage', '~> 3.7.1'
 pod 'SwiftTask', '~> 2.6.0'
 pod 'Cent', '~> 2.1.0'
 pod 'Realm', '~> 0.91.0'
+pod 'TUSafariActivity', '~> 1.0.4'
 
 target 'guangdiu' do
 

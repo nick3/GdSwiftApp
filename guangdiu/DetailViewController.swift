@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TUSafariActivity
 
 class DetailViewController: UIViewController, UIWebViewDelegate {
     
@@ -42,5 +43,16 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
   
   func setItem(let item: Item!) {
     self.item = item
+  }
+  
+  @IBAction func shareBtnPressed(sender: UIBarButtonItem) {
+    var sharingItems = [AnyObject]()
+    if let url = webView.request?.URL {
+      sharingItems.append(item.mallPageURL)
+      sharingItems.append(url)
+    }
+    let activity = TUSafariActivity()
+    let activityViewController = UIActivityViewController(activityItems: sharingItems, applicationActivities: [activity])
+    presentViewController(activityViewController, animated: true, completion: nil)
   }
 }

@@ -10,6 +10,7 @@ PODS:
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - SwiftTask (2.6.0)
+  - TUSafariActivity (1.0.4)
 
 DEPENDENCIES:
   - Alamofire (~> 1.1.4)
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - Realm (~> 0.91.0)
   - SDWebImage (~> 3.7.1)
   - SwiftTask (~> 2.6.0)
+  - TUSafariActivity (~> 1.0.4)
 
 SPEC CHECKSUMS:
   Alamofire: 524225da382071ee3e6d0badd0ee4b4dc36740de
@@ -25,5 +27,6 @@ SPEC CHECKSUMS:
   Realm: 42c178744c5a7f610b8dae3ca5f0995d46c4ac01
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SwiftTask: 141abe59dab678c8d62dce8f580d79ddc3af44e3
+  TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
 
 COCOAPODS: 0.36.0
