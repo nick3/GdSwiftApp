@@ -171,6 +171,54 @@
                                     <outlet property="delegate" destination="TT2-Sk-d86" id="cfF-Cw-dhz"/>
                                 </connections>
                             </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6HP-n4-gaG" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
+                                <rect key="frame" x="232" y="508" width="44" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="unfav">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="fav"/>
+                                <connections>
+                                    <action selector="favBtnPressed:" destination="TT2-Sk-d86" eventType="touchUpInside" id="Cw7-ff-LQC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWF-1b-hND" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
+                                <rect key="frame" x="177" y="508" width="44" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="share">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="notfav"/>
+                                <connections>
+                                    <action selector="shareBtnPressed:" destination="TT2-Sk-d86" eventType="touchUpInside" id="m3d-jr-pyW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0T-2V-4Df" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
+                                <rect key="frame" x="121" y="508" width="44" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="refresh">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="notfav"/>
+                                <connections>
+                                    <action selector="webRefreshBtnPressed:" destination="TT2-Sk-d86" eventType="touchUpInside" id="Jiv-QT-1E0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhP-lo-3Tm" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
+                                <rect key="frame" x="16" y="508" width="44" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="web_back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="notfav"/>
+                                <connections>
+                                    <action selector="webBackBtnPressed:" destination="TT2-Sk-d86" eventType="touchUpInside" id="ceg-0E-PGI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -181,14 +229,17 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="uO7-gF-d2f">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="4vm-YF-MXr">
-                            <color key="tintColor" red="0.050489767929999999" green="0.72516134509999997" blue="0.15591280860000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <barButtonItem key="rightBarButtonItem" image="more" id="yAP-Wh-0fB">
                             <connections>
-                                <action selector="shareBtnPressed:" destination="TT2-Sk-d86" id="sPW-7B-Y2G"/>
+                                <action selector="moreBtnPressed:" destination="TT2-Sk-d86" id="wmr-MK-uWI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backBtn" destination="RhP-lo-3Tm" id="qGe-dU-CnF"/>
+                        <outlet property="favBtn" destination="6HP-n4-gaG" id="qPF-s1-zXr"/>
+                        <outlet property="refreshBtn" destination="b0T-2V-4Df" id="r4N-0N-dUM"/>
+                        <outlet property="shareBtn" destination="iWF-1b-hND" id="PWl-Sa-Jme"/>
                         <outlet property="webView" destination="kxd-xI-YAn" id="8jd-md-uBT"/>
                     </connections>
                 </viewController>
@@ -257,6 +308,13 @@
     <resources>
         <image name="Star 1" width="34" height="32"/>
         <image name="Star 2" width="34" height="32"/>
+        <image name="fav" width="22" height="20"/>
         <image name="first" width="30" height="30"/>
+        <image name="more" width="6" height="21"/>
+        <image name="notfav" width="15" height="14"/>
+        <image name="refresh" width="22" height="22"/>
+        <image name="share" width="17" height="22"/>
+        <image name="unfav" width="22" height="20"/>
+        <image name="web_back" width="22" height="22"/>
     </resources>
 </document>
