@@ -20,7 +20,7 @@ class FloatBtn: SpringButton {
     */
 
   func configBtn() {
-    layer.cornerRadius = 18
+    layer.cornerRadius = 22
     layer.borderWidth = 1
     let borderColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1)
     layer.borderColor = borderColor.CGColor
@@ -28,7 +28,14 @@ class FloatBtn: SpringButton {
     layer.shadowOffset = CGSizeMake(0, 1)
     layer.shadowRadius = 2
     layer.shadowOpacity = 1
+    addTarget(self, action: "onTouchDown:", forControlEvents: .TouchDown)
+    addTarget(self, action: "onTouchUp:", forControlEvents: .TouchUpInside)
     hidden = true
+  }
+  
+  deinit {
+    removeTarget(self, action: "onTouchUp:", forControlEvents: .TouchUpInside)
+    removeTarget(self, action: "onTouchDown:", forControlEvents: .TouchDown)
   }
   
   override init() {
@@ -41,12 +48,45 @@ class FloatBtn: SpringButton {
     configBtn()
   }
   
-  func show(duration: CGFloat = 1.0, delay: CGFloat = 0.0) {
+  func onTouchDown(sender: FloatBtn) {
+    UIView.animateWithDuration(NSTimeInterval(0.1), animations: { () -> Void in
+      self.layer.shadowOffset = CGSizeMake(0, 0)
+      self.layer.shadowOpacity = 0
+      let translate = CGAffineTransformMakeTranslation(0, 2)
+      self.transform = translate
+    })
+  }
+  
+  func onTouchUp(sender: FloatBtn) {
+    UIView.animateWithDuration(NSTimeInterval(0.1), animations: { () -> Void in
+      self.layer.shadowOffset = CGSizeMake(0, 1)
+      self.layer.shadowOpacity = 1
+      let translate = CGAffineTransformMakeTranslation(0, 0)
+      self.transform = translate
+    })
+  }
+  
+  func show(duration: CGFloat = 1.0, delay: CGFloat = 0.0, complete: () -> ()) {
     hidden = false
     animation = "fadeInUp"
-    curve = "spring"
+    curve = "easeInBack"
+    x = 0
+    y = 0
     self.duration = duration
     self.delay = delay
-    animate()
+    animateNext(complete)
+  }
+  
+  func hide(duration: CGFloat = 1.0, delay: CGFloat = 0.0, complete: () -> ()) {
+    animation = "fadeOut"
+    curve = "easeInBack"
+    x = 0
+    y = 80
+    self.duration = duration
+    self.delay = delay
+    animateNext {
+      self.hidden = true
+      complete()
+    }
   }
 }

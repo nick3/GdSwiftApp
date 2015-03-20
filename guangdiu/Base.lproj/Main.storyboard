@@ -171,65 +171,53 @@
                                     <outlet property="delegate" destination="TT2-Sk-d86" id="cfF-Cw-dhz"/>
                                 </connections>
                             </webView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6HP-n4-gaG" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
-                                <rect key="frame" x="226" y="10" width="35" height="35"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="gYx-Hb-cpH"/>
-                                    <constraint firstAttribute="width" constant="35" id="sEq-TQ-SpF"/>
-                                </constraints>
-                                <state key="normal" image="faved">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6HP-n4-gaG" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
+                                <rect key="frame" x="232" y="508" width="44" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="unfav">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="notfav"/>
+                                <state key="selected" image="fav"/>
+                                <connections>
+                                    <action selector="favBtnPressed:" destination="TT2-Sk-d86" eventType="touchUpInside" id="Cw7-ff-LQC"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWF-1b-hND" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
-                                <rect key="frame" x="171" y="10" width="35" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWF-1b-hND" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
+                                <rect key="frame" x="177" y="508" width="44" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="Lf8-ha-wCe"/>
-                                    <constraint firstAttribute="width" constant="35" id="fxe-vK-9hq"/>
-                                </constraints>
-                                <state key="normal" image="faved">
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="share">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="notfav"/>
+                                <connections>
+                                    <action selector="shareBtnPressed:" destination="TT2-Sk-d86" eventType="touchUpInside" id="m3d-jr-pyW"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0T-2V-4Df" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
-                                <rect key="frame" x="115" y="10" width="35" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0T-2V-4Df" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
+                                <rect key="frame" x="121" y="508" width="44" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="3nZ-vT-WOc"/>
-                                    <constraint firstAttribute="height" constant="35" id="xX6-Gr-hLV"/>
-                                </constraints>
-                                <state key="normal" image="faved">
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="refresh">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="notfav"/>
+                                <connections>
+                                    <action selector="webRefreshBtnPressed:" destination="TT2-Sk-d86" eventType="touchUpInside" id="Jiv-QT-1E0"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWk-8x-eqL" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
-                                <rect key="frame" x="62" y="10" width="35" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhP-lo-3Tm" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
+                                <rect key="frame" x="16" y="508" width="44" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="5p9-wa-HSH"/>
-                                    <constraint firstAttribute="width" constant="35" id="rft-VZ-uGI"/>
-                                </constraints>
-                                <state key="normal" image="faved">
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="web_back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="notfav"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhP-lo-3Tm" customClass="FloatBtn" customModule="逛丢" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="35" height="35"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="9ed-DB-9px"/>
-                                    <constraint firstAttribute="height" constant="35" id="cte-Fi-YMF"/>
-                                </constraints>
-                                <state key="normal" image="faved">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="selected" image="notfav"/>
+                                <connections>
+                                    <action selector="webBackBtnPressed:" destination="TT2-Sk-d86" eventType="touchUpInside" id="ceg-0E-PGI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -241,19 +229,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="uO7-gF-d2f">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="yAP-Wh-0fB">
+                        <barButtonItem key="rightBarButtonItem" image="more" id="yAP-Wh-0fB">
                             <connections>
                                 <action selector="moreBtnPressed:" destination="TT2-Sk-d86" id="wmr-MK-uWI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backBtn" destination="RhP-lo-3Tm" id="qGe-dU-CnF"/>
+                        <outlet property="favBtn" destination="6HP-n4-gaG" id="qPF-s1-zXr"/>
+                        <outlet property="refreshBtn" destination="b0T-2V-4Df" id="r4N-0N-dUM"/>
+                        <outlet property="shareBtn" destination="iWF-1b-hND" id="PWl-Sa-Jme"/>
                         <outlet property="webView" destination="kxd-xI-YAn" id="8jd-md-uBT"/>
-                        <outletCollection property="floatBtns" destination="fWk-8x-eqL" collectionClass="NSMutableArray" id="4NJ-hN-p4a"/>
-                        <outletCollection property="floatBtns" destination="6HP-n4-gaG" collectionClass="NSMutableArray" id="vRe-yJ-W0F"/>
-                        <outletCollection property="floatBtns" destination="iWF-1b-hND" collectionClass="NSMutableArray" id="ilL-ws-L2K"/>
-                        <outletCollection property="floatBtns" destination="b0T-2V-4Df" collectionClass="NSMutableArray" id="RgB-To-Hka"/>
-                        <outletCollection property="floatBtns" destination="RhP-lo-3Tm" collectionClass="NSMutableArray" id="hJf-NZ-Xn3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AS3-nI-uvt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -321,8 +308,13 @@
     <resources>
         <image name="Star 1" width="34" height="32"/>
         <image name="Star 2" width="34" height="32"/>
-        <image name="faved" width="15" height="14"/>
+        <image name="fav" width="22" height="20"/>
         <image name="first" width="30" height="30"/>
+        <image name="more" width="6" height="21"/>
         <image name="notfav" width="15" height="14"/>
+        <image name="refresh" width="22" height="22"/>
+        <image name="share" width="17" height="22"/>
+        <image name="unfav" width="22" height="20"/>
+        <image name="web_back" width="22" height="22"/>
     </resources>
 </document>
