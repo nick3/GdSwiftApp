@@ -81,7 +81,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
       var index = 0
       if isMoreBtnsShown {
         for btn in floatBtns! {
-          btn.hide(duration: 0.5, delay: 0.1 * CGFloat(index++)) {
+          btn.hide(duration: 0.3, delay: 0.1 * CGFloat(index++)) {
             self.isFloatBtnsMoving = false
           }
         }

@@ -81,7 +81,7 @@ class FloatBtn: SpringButton {
     animation = "fadeOut"
     curve = "easeInBack"
     x = 0
-    y = 80
+    y = 60
     self.duration = duration
     self.delay = delay
     animateNext {
