@@ -159,11 +159,9 @@ class ZheKouViewController: UITableViewController {
       cell!.mallLabel.text = item.source
       let isFaved = db.isThisItemFaved(item)
       if isFaved {
-//        cell?.favBtn.titleLabel?.text = "已收藏"
         cell?.favBtn.selected = true
       }
       else {
-//        cell?.favBtn.titleLabel?.text = "收藏"
         cell?.favBtn.selected = false
       }
     }

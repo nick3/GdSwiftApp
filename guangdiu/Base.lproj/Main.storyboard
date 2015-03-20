@@ -48,13 +48,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="SMA-OS-Ti6">
-                                            <rect key="frame" x="495" y="136" width="89" height="32"/>
-                                            <state key="normal" title="收藏" image="Star 1">
+                                            <rect key="frame" x="552" y="137" width="32" height="32"/>
+                                            <state key="normal" image="unfav">
                                                 <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <state key="selected" title="已收藏" image="Star 2">
-                                                <color key="titleColor" red="0.94117647058823528" green="0.58431372549019611" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="selected" image="favbtn">
+                                                <color key="titleColor" red="0.88235294117647056" green="0.0" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="onFavBtnTapped:" destination="x2P-g0-kEG" eventType="touchUpInside" id="gxO-Qo-PQ8"/>
@@ -123,7 +123,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbZ-5Z-aMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1715" y="-286"/>
+            <point key="canvasLocation" x="1715" y="-287"/>
         </scene>
         <!--我的收藏-->
         <scene sceneID="o2q-cf-nUl">
@@ -289,7 +289,7 @@
         <scene sceneID="2Ns-i4-8eQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hFW-sD-ceE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的收藏" image="Star 2" id="gym-L7-pxB"/>
+                    <tabBarItem key="tabBarItem" title="我的收藏" image="fav" id="gym-L7-pxB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vcb-EC-hdv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -306,9 +306,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Star 1" width="34" height="32"/>
-        <image name="Star 2" width="34" height="32"/>
         <image name="fav" width="22" height="20"/>
+        <image name="favbtn" width="22" height="20"/>
         <image name="first" width="30" height="30"/>
         <image name="more" width="6" height="21"/>
         <image name="notfav" width="15" height="14"/>

@@ -23,6 +23,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
   
   var isMoreBtnsShown = false
   var isFloatBtnsMoving = false
+  var floatBtnsMovingStates: [Bool] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -75,22 +76,43 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
     self.item = item
   }
   
+  func setFloatBtnMoving(state: Bool) {
+    if state {
+      floatBtnsMovingStates.append(state)
+    }
+    else {
+      if floatBtnsMovingStates.count > 0 {
+        floatBtnsMovingStates.removeLast()
+      }
+      else {
+        isFloatBtnsMoving = false
+      }
+    }
+    if floatBtnsMovingStates.count > 0 {
+      isFloatBtnsMoving = true
+    }
+    else {
+      isFloatBtnsMoving = false
+    }
+  }
+  
   @IBAction func moreBtnPressed(sender: UIBarButtonItem) {
     if !isFloatBtnsMoving {
-      isFloatBtnsMoving = true
       var index = 0
       if isMoreBtnsShown {
         for btn in floatBtns! {
+          setFloatBtnMoving(true)
           btn.hide(duration: 0.3, delay: 0.1 * CGFloat(index++)) {
-            self.isFloatBtnsMoving = false
+            self.setFloatBtnMoving(false)
           }
         }
         isMoreBtnsShown = false
       }
       else {
         for btn in floatBtns! {
+          setFloatBtnMoving(true)
           btn.show(duration: 0.5, delay: 0.1 * CGFloat(index++)) {
-            self.isFloatBtnsMoving = false
+            self.setFloatBtnMoving(false)
           }
         }
         isMoreBtnsShown = true
