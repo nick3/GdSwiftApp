@@ -554,7 +554,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ÈÄõ‰∏¢.app/ÈÄõ‰∏¢";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/逛丢.app/逛丢";
 			};
 			name = Debug;
 		};
@@ -575,7 +575,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ÈÄõ‰∏¢.app/ÈÄõ‰∏¢";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/逛丢.app/逛丢";
 			};
 			name = Release;
 		};
