@@ -147,25 +147,13 @@ class ZheKouViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> ZheKouViewCell {
     var cell = tableView.dequeueReusableCellWithIdentifier("DataCell") as? ZheKouViewCell
+    if cell == nil {
+      let nib = NSBundle.mainBundle().loadNibNamed("ZheKouCell", owner: self, options: nil)
+      cell = nib[0] as? ZheKouViewCell
+    }
     let data: AnyObject! = tableData[UInt(indexPath.row)]
     if let item  = data as? Item {
-      cell?.cellOriginData = item
-      let title = item.title
-      let detail = item.detail
-      let imgURL = NSURL(string: item.thumbnail)
-      cell!.imgView.sd_setImageWithURL(imgURL, placeholderImage: UIImage(named: "DefaultIcon"))
-      cell!.titleLabel.text = title
-      cell!.descLabel.text = detail
-      cell!.mallLabel.text = item.source
-      let isFaved = db.isThisItemFaved(item)
-      if isFaved {
-//        cell?.favBtn.titleLabel?.text = "已收藏"
-        cell?.favBtn.selected = true
-      }
-      else {
-//        cell?.favBtn.titleLabel?.text = "收藏"
-        cell?.favBtn.selected = false
-      }
+      cell?.setCellData(item)
     }
     if !self.isEstimatedRowHeightInCache(indexPath) {
       let cellSize = cell!.systemLayoutSizeFittingSize(CGSizeMake(view.frame.size.width, 0), withHorizontalFittingPriority:1000.0, verticalFittingPriority:50.0)

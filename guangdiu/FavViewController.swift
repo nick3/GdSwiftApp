@@ -91,33 +91,18 @@ class FavViewController: UITableViewController {
 
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> ZheKouViewCell {
     var cell = tableView.dequeueReusableCellWithIdentifier("DataCell") as? ZheKouViewCell
-    if cell != nil {
-      let data: AnyObject! = tableData[UInt(indexPath.row)]
-      if let favItem = data as? FavItem {
-        let item = Item(item: favItem)
-        cell?.cellOriginData = item
-        let title = item.title
-        let detail = item.detail
-        let imgURL = NSURL(string: item.thumbnail)
-        cell!.imgView.sd_setImageWithURL(imgURL, placeholderImage: UIImage(named: "DefaultIcon"))
-        cell!.titleLabel.text = title
-        cell!.descLabel.text = detail
-        cell!.mallLabel.text = item.source
-        let isFaved = db.isThisItemFaved(item)
-        if isFaved {
-          cell?.favBtn.selected = true
-        }
-        else {
-          cell?.favBtn.selected = false
-        }
-      }
-      if !self.isEstimatedRowHeightInCache(indexPath) {
-        let cellSize = cell!.systemLayoutSizeFittingSize(CGSizeMake(view.frame.size.width, 0), withHorizontalFittingPriority:1000.0, verticalFittingPriority:50.0)
-        putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
-      }
+    if cell == nil {
+      let nib = NSBundle.mainBundle().loadNibNamed("ZheKouCell", owner: self, options: nil)
+      cell = nib[0] as? ZheKouViewCell
     }
-    else {
-      cell = ZheKouViewCell()
+    let data: AnyObject! = tableData[UInt(indexPath.row)]
+    if let favItem = data as? FavItem {
+      let item = Item(item: favItem)
+      cell?.setCellData(item)
+    }
+    if !self.isEstimatedRowHeightInCache(indexPath) {
+      let cellSize = cell!.systemLayoutSizeFittingSize(CGSizeMake(view.frame.size.width, 0), withHorizontalFittingPriority:1000.0, verticalFittingPriority:50.0)
+      putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
     }
     return cell!
   }
@@ -136,6 +121,11 @@ class FavViewController: UITableViewController {
     var cell = tableView.cellForRowAtIndexPath(indexPath)
     cell?.contentView.backgroundColor = UIColor.whiteColor()
     cell?.backgroundColor = UIColor.whiteColor()
+  }
+  
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    selectedIndex = indexPath.row
+    performSegueWithIdentifier("FavGoDetail", sender: self)
   }
 
   /*
@@ -181,7 +171,10 @@ class FavViewController: UITableViewController {
     // Pass the selected object to the new view controller.
     let detailView = segue.destinationViewController as DetailViewController
     if selectedIndex >= 0 {
-      detailView.setItem(tableData[UInt(selectedIndex)] as Item)
+      println("si = \(tableData.count)")
+      let si = tableData[UInt(selectedIndex)] as FavItem
+      let item = Item(item: si)
+      detailView.setItem(item)
     }
   }
 }

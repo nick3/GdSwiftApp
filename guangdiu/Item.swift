@@ -17,6 +17,7 @@ class Item: RLMObject {
   dynamic var detail = ""
   dynamic var thumbnail = ""
   dynamic var mallPageURL = ""
+  dynamic var site = ""
   
   convenience init(item: FavItem) {
     self.init()
@@ -27,9 +28,10 @@ class Item: RLMObject {
     self.detail = item.detail
     self.thumbnail = item.thumbnail
     self.mallPageURL = item.mallPageURL
+    self.site = item.site
   }
   
-  convenience init(id: Int, title: String, source: String, time: String, detail: String, thumbnail: String, mallPageURL: String) {
+  convenience init(id: Int, title: String, source: String, time: String, detail: String, thumbnail: String, mallPageURL: String, site: String) {
     self.init()
     self.id = id
     self.title = title
@@ -38,5 +40,6 @@ class Item: RLMObject {
     self.detail = detail
     self.thumbnail = thumbnail
     self.mallPageURL = mallPageURL
+    self.site = site
   }
 }
