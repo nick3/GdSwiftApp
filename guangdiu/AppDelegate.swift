@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
+    
+    //TODO: 数据库结构变动时，app启动会报错。需要进行migration操作。但下面注释掉的代码执行时会报“Cannot set schema version for Realms that are already open.”的错误。如何解决？
 //    RLMRealm.setSchemaVersion(1, forRealmAtPath: RLMRealm.defaultRealmPath()) { (migration, oldSchemaVersion) -> Void in
 //      migration.enumerateObjects(Item.className(), block: { (oldObj, newObj) -> Void in
 //        if oldSchemaVersion < 1 {

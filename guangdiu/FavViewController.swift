@@ -127,6 +127,15 @@ class FavViewController: UITableViewController {
     selectedIndex = indexPath.row
     performSegueWithIdentifier("FavGoDetail", sender: self)
   }
+  
+  override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    cell.layer.transform = CATransform3DMakeTranslation(200, 0, 0)
+    cell.layer.opacity = 0
+    UIView.animateWithDuration(0.25, animations: { () -> Void in
+      cell.layer.transform = CATransform3DMakeTranslation(0, 0, 0)
+      cell.layer.opacity = 1
+    })
+  }
 
   /*
   // Override to support conditional editing of the table view.
