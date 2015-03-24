@@ -135,15 +135,20 @@ class GuangDiuAPI {
         let thumbnailNode = node.findChildTagAttr("a", attrName: "class", attrValue: "thumbnail")
         var mallPageURL = thumbnailNode?.getAttributeNamed("href") ?? ""
         var thumbnail = thumbnailNode?.findChildTag("img")?.getAttributeNamed("src") ?? ""
+        var infoNode = node.findChildTagAttr("div", attrName: "class", attrValue: "info")
+        let info = infoNode?.rawContents ?? ""
+        let site = info["从.+同步"] ?? ""
         
-        if !Regex("^http://").test(mallPageURL) {
+        let re = MyRegex("^http://")
+        
+        if !re.test(mallPageURL) {
             mallPageURL = GuangDiuAPI.BasePath.baseURI + "/" + mallPageURL
         }
-        if !Regex("^http://").test(thumbnail) {
+        if !re.test(thumbnail) {
             thumbnail = GuangDiuAPI.BasePath.baseURI + "/" + thumbnail
         }
         
-        let item = Item(id: id, title: title, source: source, time: time, detail: detail, thumbnail: thumbnail, mallPageURL: mallPageURL)
+        let item = Item(id: id, title: title, source: source, time: time, detail: detail, thumbnail: thumbnail, mallPageURL: mallPageURL, site: site)
         items.append(item)
         }
     }
@@ -217,7 +222,7 @@ class GuangDiuAPI {
 //  }
 }
 
-class Regex {
+class MyRegex {
     let internalExpression: NSRegularExpression
     let pattern: String
   

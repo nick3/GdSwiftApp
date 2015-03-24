@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Realm
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
+//    RLMRealm.setSchemaVersion(1, forRealmAtPath: RLMRealm.defaultRealmPath()) { (migration, oldSchemaVersion) -> Void in
+//      migration.enumerateObjects(Item.className(), block: { (oldObj, newObj) -> Void in
+//        if oldSchemaVersion < 1 {
+//          newObj["site"] = ""
+//        }
+//      })
+//      migration.enumerateObjects(FavItem.className(), block: { (oldObj, newObj) -> Void in
+//        if oldSchemaVersion < 1 {
+//          newObj["site"] = ""
+//        }
+//      })
+//    }
     return true
   }
 
