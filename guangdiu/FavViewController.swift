@@ -171,7 +171,10 @@ class FavViewController: UITableViewController {
     // Pass the selected object to the new view controller.
     let detailView = segue.destinationViewController as DetailViewController
     if selectedIndex >= 0 {
-      detailView.setItem(tableData[UInt(selectedIndex)] as Item)
+      println("si = \(tableData.count)")
+      let si = tableData[UInt(selectedIndex)] as FavItem
+      let item = Item(item: si)
+      detailView.setItem(item)
     }
   }
 }
