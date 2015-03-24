@@ -24,6 +24,7 @@
 		0141F8441AB03DC900B66BF3 /* GuangDiuAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141F8431AB03DC900B66BF3 /* GuangDiuAPI.swift */; };
 		016230D61AB046470063809D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016230D51AB046470063809D /* DetailViewController.swift */; };
 		016230DC1AB0478C0063809D /* ZheKouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016230DB1AB0478C0063809D /* ZheKouViewController.swift */; };
+		0188E9081AC0F6E500A8F34D /* ZheKouCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0188E9061AC0F6E500A8F34D /* ZheKouCell.xib */; };
 		019104D31AB0A870009AE130 /* ZheKouViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019104D21AB0A870009AE130 /* ZheKouViewCell.swift */; };
 		01DD87281ABACE4D00386B0A /* FloatBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD87271ABACE4D00386B0A /* FloatBtn.swift */; };
 		5880F85680D21B9C78CBDA5E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE548E6822823E23F6E027D3 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -62,6 +63,7 @@
 		0141F8431AB03DC900B66BF3 /* GuangDiuAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuangDiuAPI.swift; sourceTree = "<group>"; };
 		016230D51AB046470063809D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		016230DB1AB0478C0063809D /* ZheKouViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZheKouViewController.swift; sourceTree = "<group>"; };
+		0188E9061AC0F6E500A8F34D /* ZheKouCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZheKouCell.xib; sourceTree = "<group>"; };
 		019104D21AB0A870009AE130 /* ZheKouViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZheKouViewCell.swift; sourceTree = "<group>"; };
 		01DD87271ABACE4D00386B0A /* FloatBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatBtn.swift; sourceTree = "<group>"; };
 		6DA382A94AFF6B140858CF4E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				019104D21AB0A870009AE130 /* ZheKouViewCell.swift */,
 				0125DE571AB66C9200436EFB /* DB.swift */,
 				0114D9551AB6CBD700569438 /* FavViewController.swift */,
+				0188E9061AC0F6E500A8F34D /* ZheKouCell.xib */,
 			);
 			path = guangdiu;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0141F81E1AB0312100B66BF3 /* Main.storyboard in Resources */,
+				0188E9081AC0F6E500A8F34D /* ZheKouCell.xib in Resources */,
 				0141F8231AB0312100B66BF3 /* LaunchScreen.xib in Resources */,
 				0141F8201AB0312100B66BF3 /* Images.xcassets in Resources */,
 			);
@@ -531,7 +535,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/逛丢.app/逛丢";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ÈÄõ‰∏¢.app/ÈÄõ‰∏¢";
 			};
 			name = Debug;
 		};
@@ -551,7 +555,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/逛丢.app/逛丢";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ÈÄõ‰∏¢.app/ÈÄõ‰∏¢";
 			};
 			name = Release;
 		};
